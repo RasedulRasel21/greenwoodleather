@@ -59,11 +59,13 @@
   </div>
 
   {% comment %}Check to see if sidebar should be enabled{% endcomment %}
-  {% if section.blocks.size > 0 %}
-    {% assign sidebar = true %}
-  {% else %}
-    {% assign sidebar = false %}
-  {% endif %}
+  {% assign sidebar = false %}
+  {% for block in section.blocks %}
+    {% unless block.type == '@app' %}
+      {% assign sidebar = true %}
+      {% break %}
+    {% endunless %}
+  {% endfor %}
 
   <div class="product clearfix">
     {% if sidebar %}
@@ -241,6 +243,15 @@
               {% include "social-buttons" with "product" %}
             {% endif %}
           </div>
+
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                <div class="product-app-block" {{ block.shopify_attributes }}>
+                  {% render block %}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
         </div>
       </div>
 
