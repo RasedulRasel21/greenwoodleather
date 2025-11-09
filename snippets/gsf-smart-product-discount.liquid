@@ -1,0 +1,617 @@
+
+                    <style type='text/css'>
+                        .gsf-spd-loaded .shopify-payment-button button { display: none !important; }
+                        .gsf-spd-loaded .shopify-payment-button__button { display: none !important; }
+                        .gsf-spd-loaded #candyrack-root { display:none !important;}
+                        .gsf-spd-loaded .gsf-spd-price-block {display:none!important;}
+                        .gsf-spd-loaded .gsf-spd-sale-price-block {display:none!important;}
+                    </style><script>
+    var gsf_call_spd_js = false;
+    var gsf_spd_data = {};
+    var gsf_spd_shop_domain = "{{shop.domain}}";
+    var gsf_spd_money_format = "{{ shop.money_format }}";
+    {% if template contains 'product' %}
+    var gsf_call_spd_js = true;
+    var gsf_spd_data = {page_type : 'product', data : {product_data : [{variant_id : {{ product.selected_or_first_available_variant.id }}, product_id : {{ product.id }}, name : "{{ product.title | strip_html | escape }}", price : {%if shop.money_format contains 'comma_separator'%}"{{ product.selected_or_first_available_variant.price | money_without_currency | replace:',','-' |  replace:'.',',' | replace:'-','.' | remove: ',' }}"{%elsif shop.money_format contains 'apostrophe_separator'%}"{{ product.selected_or_first_available_variant.price | money_without_currency | remove: "'" }}"{%else%}"{{ product.selected_or_first_available_variant.price | money_without_currency | remove: ',' }}"{%endif%}, currency : "{{ shop.currency }}", sku : "{{ product.selected_or_first_available_variant.sku }}", brand : "{{ product.vendor }}", variant : "{{ product.selected_or_first_available_variant.title | strip_html | escape }}", category : "{{ product.type }}"}], total_price : {%if shop.money_format contains 'comma_separator'%}"{{ product.selected_or_first_available_variant.price | money_without_currency | replace:',','-' |  replace:'.',',' | replace:'-','.' | remove: ',' }}"{%elsif shop.money_format contains 'apostrophe_separator'%}"{{ product.selected_or_first_available_variant.price | money_without_currency | remove: "'" }}"{%else%}"{{ product.selected_or_first_available_variant.price | money_without_currency | remove: ',' }}"{%endif%}, shop_currency : {% for currency in shop.enabled_currencies %}{% if currency == cart.currency %}{% assign shop_currency = currency.iso_code %}{% endif %}{% endfor %}{% if shop_currency != '' %}"{{ shop_currency }}"{% else %}"{{ shop.currency }}"{% endif %}}};
+    {% elsif template contains 'cart' and cart.item_count > 0 %}
+    var gsf_call_spd_js = true;
+    var gsf_spd_data = {page_type : 'cart', data : {product_data : [{% for item in cart.items %}{variant_id : {{ item.variant_id }}, product_id : {{ item.product_id }}, name : "{{ item.title | strip_html | escape }}", price : {%if shop.money_format contains 'comma_separator'%}"{{ item.variant.price | money_without_currency | replace:',','-' |  replace:'.',',' | replace:'-','.' | remove: ',' }}"{%elsif shop.money_format contains 'apostrophe_separator'%}"{{ item.variant.price | money_without_currency | remove: "'" }}"{%else%}"{{ item.variant.price | money_without_currency | remove: ',' }}"{%endif%}, currency : "{{ shop.currency }}", sku : "{{ item.variant.sku }}", brand : "{{ item.vendor }}", variant : "{{ item.variant.title | strip_html | escape }}", category : "{{ item.product.type }}"}{% if forloop.last != true %}, {% endif %}{% endfor %}], total_price : {%if shop.money_format contains 'comma_separator'%}"{{ cart.total_price | money_without_currency | replace:',','-' |  replace:'.',',' | replace:'-','.' | remove: ',' }}"{%elsif shop.money_format contains 'apostrophe_separator'%}"{{ cart.total_price | money_without_currency | remove: "'" }}"{%else%}"{{ cart.total_price | money_without_currency | remove: ',' }}"{%endif%}, shop_currency : {% for currency in shop.enabled_currencies %}{% if currency == cart.currency %}{% assign shop_currency = currency.iso_code %}{% endif %}{% endfor %}{% if shop_currency != '' %}"{{ shop_currency }}"{% else %}"{{ shop.currency }}"{% endif %}, num_items : "{{ cart.item_count }}"}};
+    {% elsif template contains 'index' %}
+
+    {% elsif template contains 'collection' and collection.products.size > 0 %}
+
+    {% elsif template contains 'search' and search.performed %}
+
+    {% else %}
+
+    {% endif %}
+</script><script>
+        var gsf_call_spd_js = gsf_call_spd_js || false;
+        console.log('gsf_call_spd_js : ' + gsf_call_spd_js);
+        if(gsf_call_spd_js) {
+        var gsf_spd_ajax_call = 0;
+        var gsf_spd_discount_url_call = 0;
+        var gsf_spd_cart_url_call = 0;
+        var gsf_shopify_currency_active = Shopify.currency.active || '';
+        
+        var Shopify = Shopify || {};        
+        Shopify.gsf_money_format = (gsf_spd_money_format)? gsf_spd_money_format : '${'+'{amount}'+'}';
+        Shopify.gsfFormatMoney = function(cents, format) {
+            if (typeof cents == 'string') { cents = cents.replace('.',''); }
+            var value = '';
+            var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+            var formatString = (format || this.gsf_money_format);           
+
+            function defaultOption(opt, def) {
+                return (typeof opt == 'undefined' ? def : opt);
+            }
+            function formatWithDelimiters(number, precision, thousands, decimal) {
+                precision = defaultOption(precision, 2);
+                thousands = defaultOption(thousands, ',');
+                decimal   = defaultOption(decimal, '.');
+
+                if (isNaN(number) || number == null) { return 0; }
+
+                number = (number/100.0).toFixed(precision);
+
+                var parts   = number.split('.'),
+                dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+                cents   = parts[1] ? (decimal + parts[1]) : '';
+
+                return dollars + cents;
+            }
+            
+            var action = formatString.match(placeholderRegex)[1] || 'amount';
+            switch(action) {
+                case 'amount':
+                    value = formatWithDelimiters(cents, 2);
+                break;
+                case 'amount_no_decimals':
+                    value = formatWithDelimiters(cents, 0);
+                break;
+                case 'amount_with_comma_separator':
+                    value = formatWithDelimiters(cents, 2, '.', ',');
+                break;
+                case 'amount_no_decimals_with_comma_separator':
+                    value = formatWithDelimiters(cents, 0, '.', ',');
+                break;
+            }
+            return formatString.replace(placeholderRegex, value);
+        };
+        
+        var gsfSPDGetShopProductData = function (items,type) {                
+            var gsf_spd_shop_pdata = '';            
+            for (var i = 0; i < items.length; i++) {   
+                var gsf_item = items[i];
+                if (type == 'variant_id'){                    
+                	gsf_spd_shop_pdata = gsf_item.variant_id;
+              	} else if(type == 'product_id') {
+                    gsf_spd_shop_pdata = gsf_item.product_id;
+                } else if(type == 'sku') {
+                    gsf_spd_shop_pdata = gsf_item.sku;
+                } else if(type == 'price') {
+                    gsf_spd_shop_pdata = gsf_item.price;
+                }                
+            }                 
+            return gsf_spd_shop_pdata;             
+        };
+                
+        function gsfSPDSetCookie (name, value, minutes) {
+  	        if (minutes >= 0) {
+  	            var cookie = name + '=' + value + ';';
+      	        var expires = new Date(new Date().getTime() + parseInt(minutes) * 1000 * 60);
+                cookie += 'expires=' + expires.toGMTString() + ';';
+                cookie += 'path=/;';
+                document.cookie = cookie;
+  	        } 
+        }
+
+        function gsfSPDGetCookie(cookie_name) {
+            if (document.cookie.length > 0) {
+                var cookie_start = document.cookie.indexOf(cookie_name + '=');
+                if (cookie_start !== -1) {
+                    cookie_start = cookie_start + cookie_name.length + 1;
+                    var cookie_end = document.cookie.indexOf(';', cookie_start);
+                    if (cookie_end === -1) {
+                        cookie_end = document.cookie.length;
+                    }
+                    return unescape(document.cookie.substring(cookie_start, cookie_end));
+                }
+            }
+            return '';
+        }
+        
+        function gsfSleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        
+        var gsfSPDGenerateProductItemsId = function (items, type = 'google') {            
+            var gsf_spd_item_pid = 'shopify_AU' + '_' + items.product_id + '_' + items.variant_id;
+            if (parseInt('0') === 1) {
+                gsf_spd_item_pid = items.sku;
+            } else if (parseInt('0') === 2) {
+                gsf_spd_item_pid = items.variant_id;
+            }
+            return gsf_spd_item_pid;
+        };
+        
+        function gsfGetActiveSPDData() {
+            var gsf_spd_active_data = false;
+            var gsf_spd_active_variant = gsfSPDGetCookie('gsf_spd_active_variant') || 0;
+            var gsf_shopify_variant_id = gsf_spd_active_variant;
+            if (typeof gsf_spd_data != 'undefined' && gsf_spd_data && gsf_spd_data.data.total_price > 0 && gsf_spd_data.page_type == 'product') {
+                var gsf_shopify_variant_id =  gsfSPDGetShopProductData(gsf_spd_data.data.product_data,'variant_id');
+            }
+            if (gsf_spd_active_variant > 0 && gsf_shopify_variant_id == gsf_spd_active_variant) {
+                var gsf_spd_final_data = gsfSPDGetCookie('gsf_spd_final_data_'+ gsf_spd_active_variant) || '{}';
+                gsf_spd_final_data = JSON.parse(gsf_spd_final_data);
+                var gsf_spd_final_data_count = Object.keys(gsf_spd_final_data).length;
+                if (gsf_spd_final_data_count > 0) {
+                    gsf_spd_active_data = gsf_spd_final_data;
+                }   
+            }
+            return gsf_spd_active_data;
+        }
+        
+        function gsfUpdateQueryStringParameter(uri, key, value) {
+            var gsf_spd_re = new RegExp('([?&])' + key + '=.*?(&|$)', 'i');
+            var gsf_spd_separator = uri.indexOf('?') !== -1 ? '&' : '?';
+            if (uri.match(gsf_spd_re)) {
+                return uri.replace(gsf_spd_re, '$1' + key + '=' + value + '$2');
+            } else {
+                return uri + gsf_spd_separator + key + '=' + value;
+            }
+        }
+        
+        function gsfParseJwtToken(gsf_google_token) {
+            if (typeof gsf_google_token === 'undefined' || gsf_google_token === '' || gsf_google_token === null || gsf_google_token.split('.').length !== 3) {
+                return false
+            }
+            var gsf_spd_base64Url = gsf_google_token.split('.')[1];
+            var gsf_spd_base64 = gsf_spd_base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var gsf_spd_jsonPayload = decodeURIComponent(atob(gsf_spd_base64).split('').map(function (c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            }).join(''));
+            return JSON.parse(gsf_spd_jsonPayload)
+        }
+        
+        function gsfSetDiscountCodeOnShopifyThemes(gsf_spd_jQuery) {
+            var gsf_spd_final_data = gsfGetActiveSPDData();
+            if(gsf_spd_final_data){
+                var gsf_discount_code = gsf_spd_final_data.discount_code;  
+                var gsf_spd_product_id = gsf_spd_final_data.product_id;
+                if (gsf_discount_code) {
+                    gsf_spd_jQuery('#gsf_spd_discount').remove();                                                          
+                    gsf_spd_jQuery('form[action="/cart"],form[action^="/cart?"]').append('<input type="hidden" name="discount" id="gsf_spd_discount" value="'+ gsf_discount_code +'">');
+                    
+                    if (gsf_spd_discount_url_call == 0) {
+                        var gsf_apply_discount_url = 'https://www.greenwoodleather.com.au/discount/' + gsf_discount_code;
+                        gsf_spd_jQuery.get(gsf_apply_discount_url, function () {
+                        });
+                        gsf_spd_discount_url_call = 1;
+                    }
+                    
+                }  
+            }
+        }
+        
+        function gsfSetPriceOnProduct(gsf_spd_jQuery, gsf_spd_current_price, gsf_spd_new_price, display_spd_price = true, instant_show_spd_price = false, check_currency = true) {
+            var gsf_spd_final_data = gsfGetActiveSPDData();
+            if (gsf_spd_final_data || instant_show_spd_price) {
+                if (instant_show_spd_price) {
+                    var gsf_spd_current_price = gsf_spd_current_price || gsf_spd_final_data.current_price;
+                    var gsf_spd_new_price = gsf_spd_new_price || gsf_spd_final_data.new_price;
+                } else {
+                    var gsf_spd_current_price = gsf_spd_final_data.current_price || gsf_spd_current_price;
+                    var gsf_spd_new_price = gsf_spd_final_data.new_price || gsf_spd_new_price;     
+                }
+                var gsf_spd_currency = gsf_spd_final_data.c;
+                var gsf_spd_product_id = gsf_spd_final_data.product_id;
+                var gsf_spd_variant_id = gsf_spd_final_data.variant_id;
+          
+                var gsf_shopify_currency_active = Shopify.currency.active || '';                
+                if (check_currency && gsf_shopify_currency_active && gsf_spd_currency && gsf_shopify_currency_active != gsf_spd_currency) {
+                    return false;
+                }
+                var current_price_format_money = Shopify.gsfFormatMoney(gsf_spd_current_price * 100);
+                var new_price_format_money = Shopify.gsfFormatMoney(gsf_spd_new_price * 100);
+          
+                var gsf_select_regular_price = gsf_spd_jQuery('.gsf-spd-product-sale-price, .price-item--regular, #productPrice, .product__current-price, .ProductMeta__PriceList, .gsf-spd-product-price-block .current_price, .product-price-box .current-price, form[data-productid="'+ gsf_spd_product_id +'"] .gf_product-prices .gf_product-price, .tt-price .sale-price, .tt-price .new-price, .product-block--price span[data-product-price], .product__price .price__current .money, .prices span.price, .price-list .price--highlight .money, .variant-price-list .price--highlight .money, .main-product .product-price--original, .product-info .price-list sale-price .bird-money, .product-single__price-number .money, .product__info .price-list .price--large, .main-product__block .m-price-item--regular .money, .ecom-product-single__price--regular, .tee-product-price .tee-price--current');
+                var gsf_select_sale_price = gsf_spd_jQuery('.gsf-spd-product-regular-price, .price-item--sale, .gsf-spd-product-price-block .was_price, .gsf-spd-product-price-block .savings, .product-price-box .previous-price, form[data-productid="'+ gsf_spd_product_id +'"] .gf_product-prices .gf_product-compare-price, .tt-price .old-price, .product-block--price .product__price--compare, .product__price .price__compare-at .money, .prices span.compare-price, .price-list .price--compare .money, .variant-price-list .price--compare .money, .main-product .product-price--compare, .giraffly_PCPreview_BOX .giraffly_compare_at_price, .product-info .price-list compare-at-price .bird-money, .product-single__price-compare .money, .product__info .price-list .price--compare, .main-product__block .m-price-item--sale .money, .ecom-product-single__price--sale, .tee-product-price .tee-price--compare'); 
+                
+                if (display_spd_price) {
+                    if (gsf_select_regular_price.length > 0 && gsf_spd_current_price > 0 && gsf_spd_new_price > 0) {                 
+                        gsf_spd_jQuery('.gsf-spd-price, .gsf-spd-regular-price, .gsf-spd-sale-price').remove();
+                        var gsf_spd_use_default_price_size = '';
+                        
+                        if (gsf_spd_jQuery('.gsf-spd-price-block').length == 0) {
+                            gsf_select_regular_price.wrap('<span class="gsf-spd-price-block">').hide();
+                        }
+                        if (gsf_select_sale_price.length > 0) {
+                            gsf_select_sale_price.addClass('gsf-spd-sale-price-block');
+                            gsf_select_sale_price.hide();
+                        }
+                            var gsf_spd_regular_price_style = 'text-decoration: line-through;font-weight: 700;';
+                            var gsf_spd_sale_price_style = 'color:#fa4545;font-weight: 700;';
+                            
+                            gsf_spd_jQuery('.gsf-spd-price-block').after('<span class="gsf-spd-price '+ gsf_spd_use_default_price_size +' "><span class="gsf-spd-sale-price" style="'+ gsf_spd_sale_price_style +'">'+new_price_format_money+'</span> <span class="gsf-spd-regular-price" style="'+ gsf_spd_regular_price_style +'">'+current_price_format_money+'</span></span>');                      
+                            
+                        gsfSetDiscountCodeOnShopifyThemes(gsf_spd_jQuery);
+                        gsf_spd_page_loaded = 1;
+                    }
+                } else {
+                    if (gsf_select_regular_price.length > 0 && gsf_spd_current_price > 0 && gsf_spd_new_price > 0) {                    
+                        gsf_spd_jQuery('.gsf-spd-regular-price, .gsf-spd-sale-price').remove();
+                        
+                        if (gsf_spd_jQuery('.gsf-spd-price-block').length > 0) {
+                        gsf_select_regular_price.unwrap('<span class="gsf-spd-price-block">').show();
+                        } 
+                        if (gsf_select_sale_price.length > 0) {
+                            gsf_select_sale_price.removeClass('gsf-spd-sale-price-block');
+                            gsf_select_sale_price.show();                            
+                        }
+                        gsf_spd_page_loaded = 1;
+                    }             
+                }
+                
+            }
+        }
+                
+        function gsfSetPriceOnCart(gsf_spd_jQuery, gsf_spd_final_data, create_discount_code = true, instant_show_spd_price = false) {  
+            var gsf_spd_final_data = gsfGetActiveSPDData();
+            if (gsf_spd_final_data) {
+                var gsf_spd_current_price = gsf_spd_final_data.current_price;
+                var gsf_spd_new_price = gsf_spd_final_data.new_price;  
+                var gsf_spd_product_id = gsf_spd_final_data.product_id;
+                var gsf_spd_variant_id = gsf_spd_final_data.variant_id; 
+                var gsf_spd_discount_code = gsf_spd_final_data.discount_code;
+                var gsf_spd_currency = gsf_spd_final_data.c;
+          
+                var gsf_shopify_currency_active = Shopify.currency.active || '';                
+                if (gsf_shopify_currency_active && gsf_spd_currency && gsf_shopify_currency_active != gsf_spd_currency) {
+                  return false;
+                }
+                
+                var gsf_total_cart_amount = 0;
+                var gsf_spd_discount_price_html_show = true;
+                
+                gsf_spd_jQuery.getJSON('/cart.js', function(cart) {
+                    gsf_spd_jQuery(cart.items).each(function(index, item) {
+                        var gsf_cart_index = (index + 1);
+                        if (gsf_spd_product_id == item.product_id && gsf_spd_variant_id == item.variant_id && gsf_spd_current_price == (item.price / 100) && gsf_spd_discount_code) {
+                            var gsf_select_cart_sale_price = gsf_spd_jQuery('.gsf-spd-cart-price-block .was_price, .line-item__price--compare, .cart-item--sale-price');
+                            
+                            var gsf_select_cart_price = gsf_spd_jQuery('.gsf-spd-cart-lineitem-price, .gsf-spd-cart-price, .cart__price, td[data-label="Price"], .cart-item__price, .gsf-spd-cart-price-block .sale, .desk-price-col .price-box, .Cart__ItemList .CartItem__Price .money, div.product-option, .line-item__price--highlight .money, .CartItem__PriceList .bird-money, .line-item-info .bird-money, .line-item__info .price-list .price, .cart-item--content-price .money');
+                            
+                            var gsf_select_cart_final_price = gsf_spd_jQuery('.gsf-spd-cart-lineitem-final-price, .gsf-spd-cart-final-price, .cart__final-price, .cart__item-total, .price--end, td[data-label="Total"], .Cart__ItemList .CartItem__LinePrice .money, .cart-item--total .money, .main-bottom .price, .cart--total .price, .line-item__line-price .money, .cart-item__totals, .CartItem__LinePriceList .bird-money, .text-end .bird-money, .cart-item__total .money');
+                            
+                            var gsf_replace_cart_price = gsf_spd_jQuery("[data-cart-item-key='" + item.key + "'], [data-cartitem-key='" + item.key + "'], [data-line-item-key='" + item.key + "'], [data-cart-item-id='" + item.key + "'], [data-key='" + item.key + "'], [data-id='" + item.key + "'], [data-line='" + item.key + "'], #CartItem-" + gsf_cart_index + ", #CartDrawer-Item-" + gsf_cart_index + ", .cart-table");
+                            
+                            gsfSetDiscountCodeOnShopifyThemes(gsf_spd_jQuery);
+                            
+                            var gsf_new_price = (gsf_spd_new_price > 0) ? gsf_spd_new_price : (item.price / 100);
+                            var gsf_item_final_price = (item.quantity * gsf_new_price);
+                            
+                            if (gsf_spd_discount_price_html_show) {
+                                
+                                gsf_replace_cart_price.find(gsf_select_cart_price).html(Shopify.gsfFormatMoney(gsf_new_price*100));
+                                gsf_replace_cart_price.find(gsf_select_cart_final_price).html(Shopify.gsfFormatMoney(gsf_item_final_price*100));
+                                
+                                if (gsf_select_cart_sale_price.length > 0) {                          	
+                                    gsf_replace_cart_price.find(gsf_select_cart_sale_price).hide();
+                                }
+                            }
+                        } else {
+                            var gsf_item_final_price = (item.quantity * (item.price/100));
+                        }
+                        
+                        gsf_total_cart_amount += parseFloat(gsf_item_final_price);
+                    });
+                    
+                    if (gsf_spd_discount_price_html_show && gsf_total_cart_amount > 0) {
+                        
+                        gsf_spd_jQuery('.gsf-spd-cart-subtotal-price, .cart-subtotal__price, .cart__subtotal, .totals__subtotal-value, .cart-drawer__subtotal-price, .js-cart_subtotal .money, .js-cart_grand_total .money, .sidebar-footer .subtotal-price, #bk-cart-subtotal-price, .Cart__Footer .Cart__Total .money, .total-sum-box .sum, #subtotal td, #grandtotal td, .tt-total .full-total-js, .cart__footer span, .cart__item--subtotal div[data-subtotal], .revy-upsell-cart-summary-total-value-final, .cart-subtotal .money, .footer .slidecart-subtotal, .cart-form .total .price, .cart__item-sub div[data-subtotal], .cart-title-total .money, .atc-banner--cart .atc-subtotal--price').html(Shopify.gsfFormatMoney(gsf_total_cart_amount*100));
+                        
+                        
+                        gsf_spd_jQuery('.cart__item--subtotal div[data-subtotal]').attr('gsf-cart-total-price', (gsf_total_cart_amount));
+                        gsf_spd_page_loaded = 1;
+                    }
+                });
+            } 
+        }   
+        
+        function triggerChangeVariant(handler) {          
+            function track(fn, handler, before) {
+              return function interceptor() {
+                if (before) {
+                  handler.apply(this, arguments);
+                  return fn.apply(this, arguments);
+                } else {
+                  var result = fn.apply(this, arguments);
+                  handler.apply(this, arguments);
+                  return result;
+                }
+              };
+            }
+            var currentVariantId = null;
+            function variantHandler() {
+                var selectedVariantId = window.location.search.replace(/.*variant=(\d+).*/, '$1');
+                if(!selectedVariantId) return;
+                if(selectedVariantId != currentVariantId) {
+                    currentVariantId = selectedVariantId;
+                    handler(selectedVariantId);
+                }
+            }
+            // Assign listeners
+            window.history.pushState = track(history.pushState, variantHandler);
+            window.history.replaceState = track(history.replaceState, variantHandler);
+            window.addEventListener('popstate', variantHandler);
+        }
+        
+            var gsfSPDLoadScript = function(url, callback) {
+                var script = document.createElement('script');        
+                script.type = 'text/javascript';
+                
+                if (script.readyState) {                
+                    script.onreadystatechange = function() {
+                        if (script.readyState == 'loaded' || script.readyState == 'complete') {
+                            script.onreadystatechange = null;
+                            callback();
+                        }
+                    };
+                } else {
+                    script.onload = function() {
+                        callback();
+                    };
+                }
+                        
+                script.src = url;
+                document.getElementsByTagName('head')[0].appendChild(script);
+            };
+            
+            var gsfSPDPrepareEvent = function (gsf_spd_jQuery) {
+                
+                var gsf_url_params = new URLSearchParams(window.location.search);
+                
+                var gsf_shopify_variant_id = 0;
+                var gsf_shopify_product_id = 0;
+                var gsf_shopify_sku = 0;
+                var gsf_shopify_current_price = 0;
+                var gsf_shopify_shop_domain = (gsf_spd_shop_domain) ? gsf_spd_shop_domain : '{{shop.domain}}';
+                var gsf_shopify_page_type = '';
+                var gsf_shopify_currency_rate = Shopify.currency.rate || '';
+                var gsf_spd_new_price = 0;
+                
+                if (typeof gsf_spd_data != 'undefined' && gsf_spd_data && gsf_spd_data.data.total_price > 0 ) { 
+                    var gsf_shopify_variant_id =  gsfSPDGetShopProductData(gsf_spd_data.data.product_data,'variant_id');
+                    var gsf_shopify_product_id =  gsfSPDGetShopProductData(gsf_spd_data.data.product_data,'product_id');
+                    var gsf_shopify_sku =  gsfSPDGetShopProductData(gsf_spd_data.data.product_data,'sku');
+                    var gsf_shopify_current_price =  gsfSPDGetShopProductData(gsf_spd_data.data.product_data,'price');
+                    var gsf_shopify_page_type = gsf_spd_data.page_type;
+                }
+                if ((gsf_url_params.has('pv2') && gsf_url_params.get('pv2') != null)) { 
+                    var gsf_spd_google_token = gsf_url_params.get('pv2');
+                    var gsf_spd_google_token = gsfParseJwtToken(gsf_spd_google_token);
+                    if (gsf_spd_google_token) {
+                        var gsf_shopify_product_item = {product_id:gsf_shopify_product_id, variant_id:gsf_shopify_variant_id, sku:gsf_shopify_sku};
+                        var gsf_shopify_offer_id = gsfSPDGenerateProductItemsId(gsf_shopify_product_item);
+                        var gsf_shopify_exp = Math.floor((new Date()).getTime() / 1000);
+                        gsf_spd_new_price = gsf_spd_google_token.p || 0;
+                        var gsf_spd_offer_id = gsf_spd_google_token.o || 0;
+                        var gsf_spd_exp = gsf_spd_google_token.exp || 0;
+                        if ((gsf_spd_new_price && gsf_spd_new_price > 0)
+                            && (gsf_shopify_offer_id && gsf_spd_offer_id && gsf_shopify_offer_id == gsf_spd_offer_id)
+                            && (gsf_shopify_exp && gsf_spd_exp && gsf_spd_exp > gsf_shopify_exp)
+                            ) {
+                            gsfSetPriceOnProduct(gsf_spd_jQuery, gsf_shopify_current_price, gsf_spd_new_price, true, true);
+                        }
+                    }
+                }
+                
+                var gsf_spd_final_data = gsfSPDGetCookie('gsf_spd_final_data_'+ gsf_shopify_variant_id) || '{}';                 
+                gsf_spd_final_data = JSON.parse(gsf_spd_final_data);  
+                var gsf_spd_final_data_count = Object.keys(gsf_spd_final_data).length;
+                var gsf_spd_active_variant = gsfSPDGetCookie('gsf_spd_active_variant') || 0;
+                //(gsf_shopify_variant_id && typeof gsf_spd_final_data.variant_id != 'undefined' && gsf_shopify_variant_id != gsf_spd_final_data.variant_id)
+
+                if ((gsf_url_params.has('pv2') && gsf_url_params.get('pv2') != null) || (gsf_spd_final_data_count > 0 && gsf_spd_active_variant == gsf_shopify_variant_id)) {
+                    gsf_spd_jQuery('body').addClass('gsf-spd-loaded');
+                }
+                
+                if (gsf_spd_final_data_count > 0 && gsf_spd_new_price && gsf_spd_final_data.new_price && gsf_spd_new_price != gsf_spd_final_data.new_price) {
+                    gsf_spd_final_data_count = 0;
+                }
+                
+                if (gsf_spd_final_data_count == 0 || gsf_shopify_variant_id != gsf_spd_final_data.variant_id) {
+                    if (gsf_url_params.has('pv2') && gsf_url_params.get('pv2') != null) {
+                        var gsf_token = gsf_url_params.get('pv2');
+                        var gsf_simp_token = gsf_url_params.get('simp_token') || '';
+                        if (gsf_spd_ajax_call == 0) {
+                            gsf_spd_ajax_call = 1;
+                            gsf_spd_jQuery.ajax({
+                                type: 'POST',
+                                url:  'https://www.greenwoodleather.com.au/a/gsf-proxy?t=' + Date.now(), 
+                                data : {'token' : gsf_token, 'shop_domain' : gsf_shopify_shop_domain, 'variant_id' : gsf_shopify_variant_id, 'product_id' : gsf_shopify_product_id, 'current_price' : gsf_shopify_current_price, 'simp_token' : gsf_simp_token, 'sku' : gsf_shopify_sku, 'shopify_currency_rate': gsf_shopify_currency_rate },
+                                crossDomain : true,
+                                dataType: 'json',
+                                success: function(results) {
+                                
+                                    var final_data = results.data || {};                        
+                                
+                                    if (results.error == 0 && Object.keys(final_data).length > 0 && final_data && final_data.new_price > 0) { 
+                                        var product_id = (final_data.product_id) ? final_data.product_id : 0;
+                                        var variant_id = (final_data.variant_id) ? final_data.variant_id : 0;
+                                
+                                        var new_price = final_data.new_price || 0;
+                                        var current_price = final_data.current_price || 0;
+                                        var compare_at_price = final_data.compare_at_price || 0;
+                                 
+                                        var expiration_time = (final_data.exp_time) ? final_data.exp_time : 0;
+                                        var exp_time_minutes = (final_data.exp_time_minutes) ? final_data.exp_time_minutes : 0;
+    
+                                        var gsf_spd_discount_code = final_data.discount_code;
+                                        
+                                        if (gsf_spd_discount_code) {
+                                            var final_data_new = JSON.stringify(final_data);
+                                            //gsfSPDSetCookie('gsf_discount_code_' + variant_id, gsf_spd_discount_code, exp_time_minutes);
+                                            //gsfSPDSetCookie('gsf_discount_price', new_price, exp_time_minutes);
+                                            gsfSPDSetCookie('gsf_spd_final_data_' + variant_id , final_data_new, exp_time_minutes);
+                                            gsfSPDSetCookie('gsf_spd_active_variant', variant_id, exp_time_minutes);
+                                            gsfSetPriceOnProduct(gsf_spd_jQuery, current_price, new_price);
+                                        }
+                                    } else {
+                                        console.log('Oops, product offer is expired.!');
+                                        gsfSetPriceOnProduct(gsf_spd_jQuery,gsf_shopify_current_price, gsf_shopify_current_price, false, true);
+                                         
+                                            gsf_spd_page_loaded = 1;
+                                            
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                     gsf_spd_page_loaded = 1;
+                    }
+                } else if(gsf_spd_final_data_count > 0 && gsf_spd_active_variant == gsf_shopify_variant_id) { 
+                    var gsf_spd_current_price = gsf_spd_final_data.current_price;
+                    var gsf_spd_new_price = gsf_spd_final_data.new_price;
+                    var gsf_spd_currency = gsf_spd_final_data.c;
+                    
+                    if (gsf_shopify_currency_active && gsf_spd_currency && gsf_shopify_currency_active != gsf_spd_currency) {
+                        if (gsf_spd_cart_url_call == 0) {
+                            gsf_spd_cart_url_call = 1;
+                            gsf_spd_jQuery.get('https://www.greenwoodleather.com.au/cart.json', function (response) {                        
+                                if (response && response.total_price && response.total_price > 0) {
+                                    var gsf_shopify_cart = response;
+                                    if (typeof gsf_shopify_cart.items != 'undefined'  && gsf_shopify_cart.items.length > 0) {
+                                        var gsf_shopify_cart_items = gsf_shopify_cart.items;
+                                        for (gsf_item_i in gsf_shopify_cart_items) {
+                                            var gsf_spd_item = gsf_shopify_cart_items[gsf_item_i];    
+                                            if (gsf_spd_item.id == gsf_spd_active_variant) {
+                                                gsf_spd_current_price = (gsf_spd_item.original_price / 100);
+                                                gsf_spd_new_price = (gsf_spd_item.discounted_price / 100);
+                                                gsfSetPriceOnProduct(gsf_spd_jQuery,gsf_spd_current_price, gsf_spd_new_price, true, true, false);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                          });
+                        }
+                    } else {
+                        gsfSetPriceOnProduct(gsf_spd_jQuery,gsf_spd_current_price, gsf_spd_new_price);
+                    }
+                }
+                
+                triggerChangeVariant(function(variant_Id) {
+                    gsfSleep(1000).then(() => {
+                        var gsf_spd_active_variant = gsfSPDGetCookie('gsf_spd_active_variant') || 0;   
+                        var gsf_spd_current_price = gsf_spd_final_data.current_price;
+                        var gsf_spd_new_price = gsf_spd_final_data.new_price;
+                        if (variant_Id == gsf_spd_active_variant) {                          
+                            gsfSetPriceOnProduct(gsf_spd_jQuery,gsf_spd_current_price, gsf_spd_new_price);            
+                        } else {
+                            gsfSetPriceOnProduct(gsf_spd_jQuery,gsf_spd_current_price, gsf_spd_new_price, false);
+                        }
+                    });
+                });
+                var gsf_shopify_cart_page_enabled = false;   
+                if (gsf_shopify_page_type == 'cart' || gsf_shopify_cart_page_enabled) {
+                    
+                    gsfSetPriceOnCart(gsf_spd_jQuery, gsf_spd_final_data, true, true);    
+                    
+                    var gsf_spd_ajax_open = XMLHttpRequest.prototype.open;
+                    var gsf_spd_ajax_send = XMLHttpRequest.prototype.send;                    
+                    XMLHttpRequest.prototype.open = function (method, url) {
+                        this._method = method;
+                        this._url = url;      
+                        gsf_spd_ajax_open.apply(this, arguments);
+                    };
+                    XMLHttpRequest.prototype.send = function () { 
+                        this.addEventListener('readystatechange', function () {                                                                     
+                        if (this.readyState === XMLHttpRequest.DONE) {
+                            if (this._url && (this._url.indexOf('/cart/change.js') !== -1 || this._url.indexOf('/cart/update.js') !== -1)) {                     
+                                var cart_item = JSON.parse(this.responseText);
+                                gsfSetPriceOnCart(gsf_spd_jQuery, gsf_spd_final_data, false);
+                                
+                            }
+                        }
+                        });
+                        gsf_spd_ajax_send.apply(this, arguments);
+                    };
+                    
+                    var gsf_spd_fetch_open = window.fetch;                    
+                    window.fetch = function() {                      
+                        return new Promise((resolve, reject) => {
+                            gsf_spd_fetch_open.apply(this, arguments)
+                                .then((response) => {
+                                    if (response.url && (response.url.indexOf('/cart/change') > -1 || response.url.indexOf('/cart/add') !== -1) && response.status == 200) {
+                                        response.clone().json().then((cart_item) => {
+                                            if (typeof cart_item.items != 'undefined'  && cart_item.items.length > 0) {
+                                                cart_item = cart_item.items[0];                                                
+                                            }
+                                            gsfSetPriceOnCart(gsf_spd_jQuery, gsf_spd_final_data, false);
+                                        }).catch((err) => { 
+                                            console.log(err);
+                                        });
+                                    }
+                                    resolve(response);
+                                }).catch((error) => {
+                                    console.log(error);
+                                    reject(error);
+                                });
+                        });
+                    };
+                }
+                
+            };
+            
+            function gsfSPDLoadjQuery(force_load_our_jquery = false) {
+                var gsf_spd_page_loaded_stop_time = 1500;
+                gsfSleep(gsf_spd_page_loaded_stop_time).then(() => {
+                    gsf_spd_page_loaded_stop = 1;
+                });
+                if (gsf_spd_page_loaded == 1 && gsf_spd_page_loaded_stop == 1) {
+                    return;
+                }
+                
+                var gsf_spd_url_params = new URLSearchParams(window.location.search);                 
+                var gsf_shopify_variant_id = 0;
+                if (typeof gsf_spd_data != 'undefined' && gsf_spd_data && gsf_spd_data.data.total_price > 0 ) { 
+                    var gsf_shopify_variant_id =  gsfSPDGetShopProductData(gsf_spd_data.data.product_data,'variant_id');                    
+                }
+                var gsf_spd_final_data = gsfSPDGetCookie('gsf_spd_final_data_'+ gsf_shopify_variant_id) || '{}';                 
+                gsf_spd_final_data = JSON.parse(gsf_spd_final_data);
+                var gsf_spd_final_data_count = Object.keys(gsf_spd_final_data).length;
+                if ((gsf_spd_url_params.has('pv2') && gsf_spd_url_params.get('pv2') != null) || (gsf_spd_final_data_count > 0)) {
+                    if (!window.jQuery || typeof jQuery === 'undefined' || (typeof jQuery === 'function' && typeof jQuery().jquery === 'undefined') || force_load_our_jquery) {
+                        gsfSPDLoadScript('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', function () {
+                            gsf_spd_jQuery = jQuery.noConflict(true);
+                            gsfSPDPrepareEvent(gsf_spd_jQuery);                        
+                        });
+                    } else {
+                        gsfSPDPrepareEvent(jQuery);
+                    }
+                } else {
+                
+                    gsf_spd_page_loaded = 1;
+                    
+                }
+            }
+            
+            var gsf_spd_page_loaded = 0;
+            var gsf_spd_page_loaded_stop = 0;
+            
+            if (typeof gsf_spd_data != 'undefined' && gsf_spd_data && gsf_spd_data.page_type && gsf_spd_data.page_type == 'product') {
+                setInterval(function() {
+                gsfSPDLoadjQuery();
+                }, 100);
+            } else {  
+                window.addEventListener('load', function(wind) {
+                gsfSPDLoadjQuery();
+                });
+                
+            }
+            
+        }
+        </script>

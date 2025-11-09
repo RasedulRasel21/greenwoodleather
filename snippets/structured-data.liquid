@@ -1,0 +1,444 @@
+{% if template == 'index' or page.url == '/pages/the-brand-greenwood' %}
+{% comment %}<!---- Organization Schema Resource https://medium.com/@sidhupkc/shopify-stores-seo-with-schema-markup-a-step-by-step-guide-b5f9fda978c1 --->
+{% endcomment %}
+{% comment %}<!--- Office opening hours -->{% endcomment %}
+  {% assign fa_opening_hours = "T09:00" %}
+  {% assign fa_closing_hours = "T17:00" %}
+ 
+{% comment %} <!--- Edit Price Range Below (Example format: "$300.00 - $690.00" ) --> {% endcomment %}
+  {% assign fa_price_range = "$50-$10,000" %}  
+
+{% comment %} <!---- Add keywords below using the example format and separated by comma ---> {% endcomment %}
+{% comment %} "home goods, furniture, gift baskets" {% endcomment %} 
+  {% assign fa_main_keywords =  %}
+
+{% comment %} <! ----- Product Return Date --->  {% endcomment %}
+  {% assign fa_return_days = 30 %}
+
+{% comment %} <!---- Identify store type ---> {% endcomment %}
+  {% assign fa_store_type = "OnlineStore" %}
+  
+<script type="application/ld+json" data_creator="GlennxDigital">
+  {
+    "@context": "https://schema.org",
+    "@type": "{{  fa_store_type }}",
+    "name": {{ shop.name | json }},
+    "url": "https://{{ shop.domain }}",
+    "id": "https://{{ shop.domain }}/#organization",
+    "description": {{ shop.description | json }},
+    {%- unless logo_url == blank -%}
+      "image": "{{ logo_url }}",
+      "logo": "{{ logo_url }}",
+    {%- else - -%}
+      "image": "https://www.greenwoodleather.com.au/cdn/shop/files/Tree_New_Transparent_5aa8215a-2891-43ae-9822-b855bfbdce6a_400x.gif",
+      "logo": "https://www.greenwoodleather.com.au/cdn/shop/files/Tree_New_Transparent_5aa8215a-2891-43ae-9822-b855bfbdce6a_400x.gif",
+    {%- endunless -%}
+    "email": "{{ shop.email }}",
+    "telephone": "{{ shop.phone }}",
+    "brand": {    
+        "@type": "Brand",
+        "name": "{{ shop.name }}"
+    }, 
+    "sameAs": [
+        "https://www.facebook.com/greenwoodbags",
+        "https://www.youtube.com/channel/UCjUMuasDNevbLFT1v491l7g",
+        "https://www.instagram.com/greenwood_leather/"
+      ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ shop.address.street }}",
+      "addressLocality": "{{ shop.address.city }}",
+      "addressRegion": "{{ shop.address.province }}",
+      "postalCode": "{{ shop.address.zip }}",
+      "addressCountry": "AU"
+      },
+    "contactPoint" : [
+      { 
+      "@type" : "ContactPoint",
+      "telephone" : "{{ shop.phone }}",
+      "contactType" : "Customer Service",
+      "contactOption" : "TollFree",
+      "areaServed" : "AU",
+      "availableLanguage" : "English"
+      } 
+    ],
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "AU",
+      "returnPolicyCountry": "AU",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "refundType": "FullRefund",
+      "merchantReturnDays": {{ fa_return_days }},
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility",
+      "merchantReturnLink":"https://www.greenwoodleather.com.au/pages/shipping-returns"
+        },
+  {% if fa_store_type == "Store" %}
+  {% if fa_price_range != blank %}
+    "priceRange" : "{{ fa_price_range }}",
+  {% endif %}
+    "openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
+    "openingHoursSpecification": [
+       {
+      "@type": "openingHoursSpecification",
+      "dayOfWeek" : "https://schema.org/Monday",
+      "opens" : "{{ fa_opening_hours }}",
+      "closes" : "{{ fa_closing_hours }}" 
+        },
+      {
+      "@type": "openingHoursSpecification",
+      "dayOfWeek" : "https://schema.org/Tuesday",
+      "opens" : "{{ fa_opening_hours }}",
+      "closes" : "{{ fa_closing_hours }}" 
+        },
+      {
+      "@type": "openingHoursSpecification",
+      "dayOfWeek" : "https://schema.org/Wednesday",
+      "opens" : "{{ fa_opening_hours }}",
+      "closes" : "{{ fa_closing_hours }}" 
+        },
+      {
+      "@type": "openingHoursSpecification",
+      "dayOfWeek" : "https://schema.org/Thursday",
+      "opens" : "{{ fa_opening_hours }}",
+      "closes" : "{{ fa_closing_hours }}" 
+        },
+      {
+      "@type": "openingHoursSpecification",
+      "dayOfWeek" : "https://schema.org/Friday",
+      "opens" : "{{ fa_opening_hours }}",
+      "closes" : "{{ fa_closing_hours }}" 
+        },
+       {
+      "@type": "openingHoursSpecification",
+      "dayOfWeek" : "https://schema.org/Saturday",
+      "closes" : "00:00-23:00"
+        },
+       {
+      "@type": "openingHoursSpecification",
+      "dayOfWeek" : "https://schema.org/Sunday",
+      "closes" : "00:00-23:00"
+        }
+      ],
+    "currenciesAccepted" : "AUD",
+  {% endif %}
+    "acceptedPaymentMethod": [
+      "http://purl.org/goodrelations/v1#PaymentMethodCreditCard",
+      "http://purl.org/goodrelations/v1#GoogleCheckout",
+      "http://purl.org/goodrelations/v1#PayPal",
+      "http://purl.org/goodrelations/v1#DirectDebit"
+    ],
+    "keywords" : "{{ fa_main_keywords }}"
+    
+}
+</script>
+ <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "Website",
+          "url": "{{ shop.url }}",
+          "potentialAction": {
+              "@type": "SearchAction",
+              "target": "{{ shop.url }}/search?q={query}",
+              "query-input": "required name=query"
+          }
+      }
+    </script>
+
+{% elsif template contains 'collection' %}
+
+   <script type="application/ld+json" data_creator="GlennxDigital"> 
+{
+  "@context": "http://schema.org",
+  "@type": "ItemList",
+  "name": "{{ collection.title }}",
+  "url": "{{ shop.secure_url }}{{ collection.url }}",
+  "image": "{{ collection.image | image_url }}",
+  "description":" {{ collection.description |strip_html | escape }}", 
+  "itemListElement": [
+    {% for product in collection.products %}
+    
+        {% if forloop.last %}
+		{%- assign position = position | plus: 1 -%}
+		{
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": {{ product.title | json }},
+            "url": "{{ shop.secure_url }}{{ product.url }}",
+            "description": "{{ product.description  | strip_html | escape }}",
+            "image": "https:{{ product.images[0].src | img_url }}"
+            }
+          {% else %}
+         {%- assign position = position | plus: 1 -%}
+        {
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": {{ product.title | json }},
+            "url": "{{ shop.secure_url }}{{ product.url }}",
+            "description": "{{ product.description | strip_html | escape  }}",
+            "image": "https:{{ product.images[0].src | img_url }}"
+    	 },    
+          {% endif %}
+		{% endfor %} 
+		
+
+    ]
+}
+  </script> 
+
+{% elsif template contains 'article' %}
+
+  <script type="application/ld+json" data_creator="glennxDigital">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ article.title }}",
+  "image": "{{ article.image }}", 
+  "mainEntityofPage": "{{ article.url }}", 
+  "author": {
+    "@type": "Organization",  
+    "url": "{{ shop.url }}", 
+    "name": "{{ article.author }}"
+  },  
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "image": "{{ article.image }}"
+    }
+  },
+  "datePublished": "{{ article.published_at }}"
+}
+</script>
+
+{% elsif template contains 'product' %}
+
+  {% comment %}  
+Merchant Return Policy Resource 
+https://schemantra.com/blog/2023/06/02/how-to-add-shipping-details-and-merchant-return-policy-to-an-existing-product-schema/ {% endcomment %} 
+{%- assign fa_product_id_alpha2_code = 'AU' -%}
+
+{% comment %}  
+PRODUCT IDset your product id values are default, product_id, parent_id, sku {% endcomment %} 
+{%- assign fa_product_id = 'sku' -%}
+
+{% comment %} 
+RETURNS How long is your returns policy in days? {% endcomment %} 
+{%- assign fa_return_days = 30 -%}
+
+{% if cart.currency.iso_code == 'AUD' %}
+{%- assign fa_shipping_currency = "AUD" -%}
+  
+{% comment %}   
+SHIPPING How much do customer need to spend for free returns, assign your currency? {% endcomment %} 
+{%- assign fa_shipping_price = 0.00 -%}   
+{%- endif -%}
+  
+{%- assign fa_shipping_handling_time_min = 1 -%}
+{%- assign fa_shipping_handling_time_max = 2 -%}
+{%- assign fa_shipping_shipping_time_min = 2 -%}
+{%- assign fa_shipping_shipping_time_max = 3 -%}
+  
+{% comment %} 
+Disable / Enable shipping or returns true for enabled, false for disabled {% endcomment %} 
+{%- assign fa_returns = 'true' -%} 
+{%- assign fa_shipping = 'true' -%}
+
+{% comment %}  If relatedProducts are available {% endcomment %} 
+{% assign relatedProducts = product.metafields[metafield_namespace][metafield_key].value %}  
+
+{% comment %}
+<!-- ==================================== -->
+<!-- ASSIGN NEW DYNAMIC VARIABLE --> {% endcomment %}
+
+{%- assign fa_current_variant = product.selected_or_first_available_variant -%}
+{% assign fa_compare_variant_price = product.selected_or_first_available_variant.compare_at_price | times: SaleMultiplier | divided_by: 100.0 | json   %}  
+
+{%- if fa_product_id == 'default' -%}
+{%- capture fa_product_id_value -%}shopify_{{ fa_product_id_alpha2_code }}_{{ product.id }}_{{ fa_current_variant.id }}{%- endcapture -%}
+{%- elsif fa_product_id == 'product_id' -%}
+{%- capture fa_product_id_value -%}{{ fa_current_variant.id }}{%- endcapture -%}
+{%- elsif fa_product_id == 'parent_id' -%}
+{%- capture fa_product_id_value -%}{{product.id }}{%- endcapture -%}
+{%- elsif fa_product_id == 'sku' -%}  
+{%- capture fa_product_id_value -%}{{ fa_current_variant.sku | escape }}{%- endcapture -%}
+{%- endif -%}
+
+{%- if cart.currency.iso_code == 'GBP' or cart.currency.iso_code == 'USD' or cart.currency.iso_code == 'JPY' or cart.currency.iso_code == 'AUD' or cart.currency.iso_code == 'AED' or cart.currency.iso_code == 'CAD' or cart.currency.iso_code == 'BWP' or cart.currency.iso_code == 'BND' or cart.currency.iso_code == 'DOP' or cart.currency.iso_code == 'GTQ' or cart.currency.iso_code == 'HKD' or cart.currency.iso_code == 'INR' or cart.currency.iso_code == 'ILS' or cart.currency.iso_code == 'YEN' or cart.currency.iso_code == 'KES' or cart.currency.iso_code == 'KOR' or cart.currency.iso_code == 'LBP' or cart.currency.iso_code == 'MYR' or cart.currency.iso_code == 'MXN' or cart.currency.iso_code == 'NPR' or cart.currency.iso_code == 'NZD' or cart.currency.iso_code == 'NIO' or cart.currency.iso_code == 'NGN' or cart.currency.iso_code == 'PKR' or cart.currency.iso_code == 'CNY' or cart.currency.iso_code == 'PHP' or cart.currency.iso_code == 'SGD' or cart.currency.iso_code == 'LKR' or cart.currency.iso_code == 'CHF' or cart.currency.iso_code == 'TWD' or cart.currency.iso_code == 'TSH' or cart.currency.iso_code == 'THB' or cart.currency.iso_code == 'UGX' or cart.currency.iso_code == 'KWD' or cart.currency.iso_code == 'CLP' or cart.currency.iso_code == 'BHD' -%}
+{%- assign fa_product_price = fa_current_variant.price | money_without_currency | remove:',' -%}
+{%- else -%}
+{%- assign fa_product_price = fa_current_variant.price | money_without_currency | remove:'.' | replace: ',', '.' -%}
+{%- endif -%}
+  
+{% comment %} <!--- ProductListDrop --> {% endcomment %}
+{%  assign my_product_list_drop = product.metafields.product_info.related_products.value | reverse | reverse %}
+  
+<script type="application/ld+json" data_creator="GlennxDigital">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "@id": {{ canonical_url | json }},
+  "name": "{{ product.title | strip_html | escape }}",
+  "url": "{{ shop.url }}{{ product.url }}",
+  "sku": "{{ fa_product_id_value }}",
+  "keywords" : "{% for tag in product.tags %}{{ tag | escape }}{% unless forloop.last %}, {% endunless %} {% endfor %} ",
+  {%- if product.variants.first.barcode.size >= 12 and product.variants.first.barcode.size <= 14 -%}
+  "gtin": {{ product.variants.first.barcode }},
+  {%- endif -%}
+  "productID": "{{ product.id }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ product.vendor | escape }}"
+  },
+  "description" : {{ product.description | truncatewords: 120 |strip_html | json }},
+  "image": "https:{{ product.featured_image.src | img_url: '1500x1500' }}",
+ {% if my_product_list_drop != blank %}  
+  "isRelatedTo": [
+   {% assign objects = '[]' | json %}  
+        {% assign i = 0 %} 
+        {% for product in my_product_list_drop %}       
+          {% if forloop.first  %}
+      {
+        "@type" : "Product",         
+        "name": "{{ my_product_list_drop[0].title | escape }}",    
+        "url": "{{ my_product_list_drop[0].url  | escape }} "    
+      }
+        {% else %}
+          {% assign i = i | plus: 1 %}    
+    ,{
+        "@type" : "Product",         
+        "name": "{{ my_product_list_drop[i].title  | escape }}",   
+        "url": "{{ my_product_list_drop[i].url  | escape }}"    
+      }
+         {% endif %}
+        {% endfor %}    
+   ],   
+   {% endif %} 
+   "isFamilyFriendly": "True",
+    "audience": {
+        "@type": "PeopleAudience",
+        "@id": "PeopleAudience",
+        "audienceType": "Country",
+        "name": "Australia"
+    },
+  {%- if product.variants -%}
+    "offers":
+        [
+   {%- for variant in product.variants -%}
+      {
+        "@type" : "Offer",
+        {%- if fa_returns == 'true' -%}
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "{{ fa_product_id_alpha2_code }}",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": {{ fa_return_days }},
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
+        },
+        {%- endif -%}
+        {%- if fa_shipping == 'true' -%}
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          {% if fa_shipping_price %}
+          "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": {{ fa_shipping_price }},
+              "currency": "{{ fa_shipping_currency }}"
+          },
+          "weight":{
+              "@type": "QuantitativeValue",
+              "value" : "{{ product.variants.first.weight | weight_with_unit }}"
+          },
+          {%- endif -%}
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "{{ fa_product_id_alpha2_code }}"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "businessDays": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "https://schema.org/Monday",
+                    "https://schema.org/Tuesday",
+                    "https://schema.org/Wednesday",
+                    "https://schema.org/Thursday",
+                    "https://schema.org/Friday"
+                ]
+              },
+            "cutoffTime": "10:00.00AEST",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue":{{fa_shipping_handling_time_min}},
+              "maxValue": {{fa_shipping_handling_time_max}},
+              "unitCode": "DAY"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue":  {{fa_shipping_shipping_time_min}},
+              "maxValue":  {{fa_shipping_shipping_time_max}},
+              "unitCode": "DAY"
+            }
+          }
+        },
+        {%- endif -%}
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "price": "{{ fa_product_price }}",       
+        "itemCondition" : "http://schema.org/NewCondition",
+        "availability" : "http://schema.org/{% if fa_current_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "url" : "{{ shop.url }}{{ fa_current_variant.url }}",
+            {%- if fa_current_variant.image -%}
+              {%- assign variant_image_size = fa_current_variant.image.width | append: 'x' -%}
+              "image": "https:{{ fa_current_variant.image.src | img_url: variant_image_size }}",
+            {%- else -%}
+              "image": "https:{{ product.featured_image.src | img_url: '1500x1500' }}",
+            {%- endif -%}
+            {%- if fa_current_variant.title != 'Default Title' -%}
+              "name" : "{% comment %}{{ product.title | strip_html | escape }} - {% endcomment %} {{ fa_current_variant.title | escape }}",
+            {%- else -%}
+              "name" : "{{ product.title | strip_html | escape }}",
+            {%- endif -%}
+            {%- if product.variants.first.barcode != blank -%}
+              "gtin": {{ product.variants.first.barcode }},            
+            {% else %} 
+              "mpn": "{% if product.metafields.mm-google-shopping.mpn != blank %} {{ product.metafields.mm-google-shopping.mpn.value }} {% else %}{{ fa_product_id_value }}{% endif %}",
+            {%- endif -%}
+			"sku": "{{ fa_product_id_value }}",
+          "priceValidUntil": "{{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | uri_encode | replace:'+','%20' }}",    
+   {%- if product.variants.size >= 1 -%}
+      "additionalProperty": [
+    {% if product.tags %}
+     {    
+     "@type": "PropertyValue",
+      "name" : "Tags",    
+      "value" : "{% for tag in product.tags %}{{ tag | escape }}{% unless forloop.last %}, {% endunless %} {% endfor %} "   
+      },{% endif %}
+     
+     {% if product.type != blank %}
+     {
+        "@type": "PropertyValue",
+        "name": "Product Type",
+        "value": "{{ product.type }}"
+        },{% endif %}
+     {
+        "@type": "PropertyValue",
+        "propertyID": "item_group_id",
+        "value": "{{ product.id }}"
+      }      
+     ]
+      {%- endif -%} 
+   }
+   {% unless forloop.last %},{% endunless %}  
+  {% endfor %}
+  ]
+}
+</script>
+
+     {%- endif -%}
+
+{% comment %} 
+  // DON'T REMOVE THE LAST ENDIF CONDITION
+{% endcomment %}
+{%- endif -%}
