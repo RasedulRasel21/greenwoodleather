@@ -30,6 +30,7 @@
     "cart_show_free_shipping_bar": true,
     "social_facebook": "https://www.facebook.com/greenwoodleathergoods/",
     "social_youtube": "https://www.youtube.com/channel/UCjUMuasDNevbLFT1v491l7g",
+    "favicon": "shopify://shop_images/tree_logo.png",
     "content_for_index": [],
     "color_schemes": {
       "scheme-1": {

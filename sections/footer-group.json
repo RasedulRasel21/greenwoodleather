@@ -73,6 +73,15 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "image_7HW4md": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Tree_New_Transparent_5aa8215a-2891-43ae-9822-b855bfbdce6a.gif",
+            "image_width": 90,
+            "link": "",
+            "content": "<p>2/3 Remount Way</p><p>Cranbourne West - 3977</p><p>Victoria, Australia</p><p>sales@greenwoodleather.com.au</p><p><a href=\"tel:0387387118\" title=\"tel:0387387118\">0387387118</a></p>"
+          }
+        },
         "links": {
           "type": "links",
           "settings": {
@@ -89,14 +98,6 @@
             "menu_title": ""
           }
         },
-        "text_XQJ34q": {
-          "type": "text",
-          "settings": {
-            "title": "CONTACT",
-            "content": "<p>2/3 Remount Way</p><p>Cranbourne West - 3977</p><p>Victoria, Australia</p><p>sales@greenwoodleather.com.au</p><p><a href=\"tel:0387387118\" title=\"tel:0387387118\">0387387118</a></p>",
-            "enable_follow_on_shop": false
-          }
-        },
         "newsletter": {
           "type": "newsletter",
           "settings": {
@@ -108,9 +109,9 @@
         }
       },
       "block_order": [
+        "image_7HW4md",
         "links",
         "links_fAjxXh",
-        "text_XQJ34q",
         "newsletter"
       ],
       "settings": {
