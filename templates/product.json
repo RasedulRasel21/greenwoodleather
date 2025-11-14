@@ -1,0 +1,216 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "product_feature_banner_X4eAdr": {
+      "type": "product-feature-banner",
+      "disabled": true,
+      "name": "Product Feature Banner",
+      "settings": {
+        "feature_1_text": "100% Full Grain Leather",
+        "feature_2_text": "Experience the Quality - 30 Days to Decide",
+        "feature_3_text": "Free Post-Pay",
+        "background_color": "#f5f5f5",
+        "text_color": "#333333"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h3"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "rating_3CJAHe": {
+          "type": "rating",
+          "settings": {
+            "show_empty": true,
+            "rating_mode": "rating"
+          }
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "modal_TrrDHN": {
+          "type": "modal",
+          "settings": {
+            "button_title": "Button title",
+            "button_style": "outline",
+            "stretch_button": false,
+            "button_background": "",
+            "button_text_color": "",
+            "modal_title": "Modal title",
+            "modal_content": ""
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "collapse_content": true,
+            "show_below_gallery": false
+          }
+        },
+        "complementary_products": {
+          "type": "complementary_products",
+          "settings": {
+            "title": "Pairs well with",
+            "products_count": 2,
+            "show_below_gallery": true,
+            "stack_products": false,
+            "show_quick_buy": true
+          }
+        },
+        "accordion_aRJHwf": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "Description",
+            "content": "{{ product.description }}",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_KM3FeR": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "The Leather",
+            "content": "<p>Our leather is incredibly easy to care for. With time and use, the natural oils in the leather will rise to the surface, developing a beautiful patina and smoothing any scuffs or scratches that may have accumulated. Learn more about caring for your new leather product.</p><p><strong>Full Grain: </strong>Meticulously sourced from the finest hides, this premium material boasts unique textures and character, showcasing nature's artistry at its best. As time passes, watch as its surface develops a unique patina, telling your personal journey through the years. Unlike processed leathers, full grain leather stands the test of time, due to its unmatched strength and resilience. Its dense fibers offer exceptional resistance to wear, cuts, and moisture, our full grain leather ensures lasting beauty that only gets better with age.</p><p><strong>Pebbled: </strong>Unlike most brands that use artificial stamping methods to create patterns, our pebbled leather is achieved through a natural tumbling process. The distinctive raised, pebble-shaped texture adds sophistication and makes a bold statement wherever you go. But it's not just about looks—pebbled leather is built to last. Worried about daily wear and tear? Don’t be! The unique pebbled surface ages gracefully, developing a natural patina that will evolve for years to come!</p><p><strong>Suede:</strong> Our suede leather begins with an intricate process: the hide is split to separate the soft underside from the top layer. This top layer is then tanned, buffed, sanded, and dyed to create the signature velvety texture that defines high-quality suede. Naturally slouchy and pliable, suede leather ages gracefully, developing a rich patina that tells its own story over time. Most natural imperfections are gently smoothed away during production, while subtle traces—like healed veining and the soft, napped surface—are preserved to celebrate the leather’s unique character and charm.</p><p><em>Our durable leather goods are unlined, featuring the natural suede side of the hide. Since fabric-lined bags inevitably discolor and tear with use, we chose to showcase the soft sueded underside of our hides, ensuring that your bag lasts a lifetime.</em></p><p><em>Because leather is a natural material, slight color and batch variations are normal. Factors like hide age, season, and dye absorption can all affect the final shade—making each piece uniquely yours.</em></p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_DCKw4p": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "Verona Tote Bag Sizing",
+            "content": "<p><strong>Medium Measurements:</strong><br/>Maximum Top Width: 14.5\"<br/>Bottom Width: 12.5\"<br/>Height: 8.5\"<br/>Bottom Depth: 4.5\"<br/>Weight: 1 lb 5 oz</p><p><strong>Large Measurements:</strong><br/>Maximum Top Width: 17.5\"<br/>Bottom Width: 15\"<br/>Height: 10.5\"<br/>Bottom Depth: 5\" <br/>Weight: 1 lb 12 oz</p><p><strong>Shoulder Straps</strong><br/>Drop Length: 11<br/>Width: 0.5\"</p><p><br/><em>All measurements are approximations due to inherent variations in handmade leather items.</em></p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_69T3Rz": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "Shipping",
+            "content": "<p>Your shipping method can be selected at checkout. Costs will be calculated prior to payment and will vary by order depending on a number of factors, including but not limited to: item count, package weight, delivery ZIP code, and selected shipping method.</p>",
+            "liquid": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "payment_terms",
+        "rating_3CJAHe",
+        "separator",
+        "modal_TrrDHN",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "complementary_products",
+        "accordion_aRJHwf",
+        "accordion_KM3FeR",
+        "accordion_DCKw4p",
+        "accordion_69T3Rz"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "",
+        "container_size": "xl",
+        "product_info_size": 35,
+        "show_sticky_add_to_cart": true,
+        "center_basic_info": false,
+        "desktop_media_layout": "carousel_thumbnails_bottom",
+        "desktop_media_grid_gap": 30,
+        "mobile_controls": "thumbnails",
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": false,
+        "recommendations_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "Related products",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "product_feature_banner_X4eAdr",
+    "main",
+    "related-products"
+  ]
+}
