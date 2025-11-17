@@ -1,0 +1,56 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "rich_text_EjRHUe": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_qYwa8F": {
+          "type": "heading",
+          "settings": {
+            "text": "THE BRAND - GREENWOOD ®",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_g8RhAT": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>GREENWOOD ® Leather is a family business based in Australia that discovered a passion for leather bags. Since 2016, we have enthusiastically developed and created new designs; improved the old and combined tradition and ideas – always with the aim to make you happy.</p><p>Our beautiful leather products are created from the heart. From the small wallets to the large travel bags, each of our products are handmade and unique. Each product has its own distinctive name, where the different bags families cross-generationally offer a companion for life.</p><p>With use they gain their individual character and tell stories of everyday life, of friends, journeys and their quirky kinfolk. When you choose a Greenwood Leather product, you become part of the family. You don’t go for every trend, have a high sense of values and a soft spot for individual, unconventional style. </p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_qYwa8F",
+        "richtext_g8RhAT"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "start",
+        "remove_vertical_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_EjRHUe"
+  ]
+}

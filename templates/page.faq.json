@@ -15,28 +15,109 @@
         "category": {
           "type": "category",
           "settings": {
-            "title": "Order"
+            "title": "<a href=\"https://www.greenwoodleather.com.au/apps/help-center#collapse630935\"><strong>SHIPPING</strong></a>",
+            "icon": "none",
+            "icon_width": 16
           }
         },
         "question-1": {
           "type": "question",
           "settings": {
-            "question": "Do you ship overseas?",
-            "answer": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+            "question": "WHAT IS THE DELIVERY TIME OF THE GREENWOOD LEATHER PRODUCTS?",
+            "answer": "<p>If a product is in stock and you order it before 3 p.m., your purchase will be shipped mostly the same day. You recognize a product that is currently not in stock by the button Send me an email as soon as it is available. You may leave your email address and as soon as the product is back in stock in our warehouse, you will be notified. It is difficult for us to say how long this can take: it can be four weeks, but it can also take longer. Do you need the product in the short term? Please contact our customer service via </p><p><strong>sales@greenwoodleather.com.au</strong></p>"
           }
         },
         "question-2": {
           "type": "question",
           "settings": {
-            "question": "How long will it take to get my orders?",
-            "answer": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+            "question": "WHAT ARE YOUR SHIPPING CHARGES?",
+            "answer": "<p>We offer free shipping on all orders for Australia and New Zealand. For more shipping information, please see our shipping and delivery page.</p>"
           }
         },
         "question-3": {
           "type": "question",
           "settings": {
-            "question": "Any question?",
-            "answer": "<p>You can contact us through our contact page! We will be happy to assist you.</p>"
+            "question": "CAN I CHANGE MY DELIVERY ADDRESS / CANCEL MY ORDER ?",
+            "answer": "<p>Please email us immediately at <a href=\"mailto:sales@greenwoodleather.com.au\">sales@greenwoodleather.com.au</a> with the subject title \"CHANGE OF ADDRESS\" / \"CANCEL MY ORDER\"</p><p>Please provide your order number and new address details. We will do our best to make amendments before your order is dispatched. Please note if your email is not titled correctly we cannot guarantee that your request will be caught before dispatch.</p>"
+          }
+        },
+        "question_MmPf6a": {
+          "type": "question",
+          "settings": {
+            "question": "CAN I ALSO PICK UP MY ORDER?",
+            "answer": "<p>You can pick up your order at our warehouse in Cranbourne West (Victoria). In that case, it is important that you first contact our customer service. This can be done by email (<a href=\"mailto:sales@greenwoodleather.com.au\">sales@greenwoodleather.com.au</a>) or by phone (0387387118).</p>"
+          }
+        },
+        "question_rXz4b9": {
+          "type": "question",
+          "settings": {
+            "question": "DOES THE GREENWOOD LEATHER SHIP WORLDWIDE?",
+            "answer": "<p>Yes, we ship worldwide. For more detailed information, please see our shipping and delivery page.</p>"
+          }
+        },
+        "question_tJxNVi": {
+          "type": "question",
+          "settings": {
+            "question": "CAN I CHANGE MY DELIVERY ADDRESS / CANCEL MY ORDER ?",
+            "answer": "<p>Please email us immediately at <a href=\"mailto:sales@greenwoodleather.com.au\">sales@greenwoodleather.com.au</a> with the subject title \"CHANGE OF ADDRESS\" / \"CANCEL MY ORDER\"</p><p>Please provide your order number and new address details. We will do our best to make amendments before your order is dispatched. Please note if your email is not titled correctly we cannot guarantee that your request will be caught before dispatch.</p>"
+          }
+        },
+        "category_AkfypN": {
+          "type": "category",
+          "settings": {
+            "title": "<strong>EXCHANGES & RETURNS</strong>",
+            "icon": "none",
+            "icon_width": 16
+          }
+        },
+        "question_RiRJjR": {
+          "type": "question",
+          "settings": {
+            "question": "HOW DO I RETURN / EXCHANGE AN ITEM?",
+            "answer": "<p><strong>RETURNS</strong></p><p>In order to return an item, you must complete the return process within 15 days from delivery (this window is extended around holidays). You will be responsible for paying for your own shipping costs for returning your item. Original shipping costs are non-refundable.</p><p>To be eligible for a return, your item must be unused and in new condition.</p><p>Returned merchandise can be refunded to the original form of payment, or a digital gift card can be issued. There are certain situations where only partial refunds may be granted (if applicable), such as an item not in its original condition, is damaged or missing parts for reasons not due to our error.</p><p><strong>REFUNDS</strong></p><p>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item. Your refund, if applicable, will be processed and a credit will be applied to your credit card or original method of payment. Processing time will depend on your method of payment and your bank’s policies.</p><p>Please allow up to 5 business days for your return to be processed.</p><p><strong>EXCHANGES (if applicable)</strong></p><p>We do allow exchanges for unused, non-personalized items. You must contact us within 15 days of delivery and we will provide instructions on how to proceed with an exchange. Send us an email at <a href=\"mailto:sales@greenwoodleather.com.au\">sales@greenwoodleather.com.au</a> and please include your order number.</p>"
+          }
+        },
+        "question_QCP7EE": {
+          "type": "question",
+          "settings": {
+            "question": "MY ITEM IS FAULTY, WHAT DO I DO?",
+            "answer": "<p>First of all, we're super sorry about that! Please email <a href=\"mailto:sales@greenwoodleather.com.au\">sales@greenwoodleather.com.au </a>with your order details and an image of the fault and your order number we'll take care of it for you right away. </p>"
+          }
+        },
+        "question_pXRKWC": {
+          "type": "question",
+          "settings": {
+            "question": "HAVE YOU RECEIVED MY RETURNED ITEM?",
+            "answer": "<p>Once we have received your returned goods, we will send you an e-mail. Processing a return takes between 3 to 5 business days. The refund will follow within 5 working days.</p>"
+          }
+        },
+        "category_VUmH9q": {
+          "type": "category",
+          "settings": {
+            "title": "<strong>PRODUCT & LEATHER INFO</strong>",
+            "icon": "none",
+            "icon_width": 16
+          }
+        },
+        "question_dRiTgA": {
+          "type": "question",
+          "settings": {
+            "question": "DO YOU TAKE ORDERS FOR CUSTOM ITEMS OR OFFER ALTERATIONS TO YOUR DESIGNS?",
+            "answer": "<p>As a handmade leather goods company, we receive a lot of queries about custom work. Unfortunately, we aren't able to offer bespoke craftsmanship to our customers. Even small changes to designs significantly disrupt the flow of production, which is why we aren't able to accommodate those requests. Thank you so much for understanding!</p>"
+          }
+        },
+        "question_QqNyHX": {
+          "type": "question",
+          "settings": {
+            "question": "ARE THE GREENWOOD LEATHER PRODUCTS WATERPROOF?",
+            "answer": "<p>It is of course possible that your leather bag will be in the rain. In general, leather resists water fairly well, but we do not guarantee that our bags are 100% waterproof. A short shower should absolutely not be a problem (provided that all zippers are closed properly). When the bag is exposed to moisture for a long time, it may seep into the inside of the bag. Again, we are talking about long-term exposure here.</p><p>If you properly maintain your bag with our <a href=\"https://www.greenwoodleather.com.au/collections/leather-care\" title=\"Leather Care\">leather wax </a>(click), you will most likely be able to avoid these problems.</p><p>We recommend treating the leather of your bag 4 times per year with neutral leather wax. The leather wax will keep the leather hydrated and healthy. Your bag will look like new for a longtime.</p>"
+          }
+        },
+        "question_RxGxQc": {
+          "type": "question",
+          "settings": {
+            "question": "WHERE ARE GREENWOOD LEATHER PRODUCTS MADE?",
+            "answer": "<p>The leather used for our products mostly comes from Australia, Argentina, Brazil, and India. Our main factory is located in India. We have a wonderful working relationship with our manufacturer. Our values align and we share a common goal to produce the best quality bags for fair prices. This factory is built in a green environment where there are good living conditions for the employees.<br/><br/>Our aim is to offer you well thought-out, well-made products at a fair price, all year round.</p>"
           }
         }
       },
@@ -44,9 +125,27 @@
         "category",
         "question-1",
         "question-2",
-        "question-3"
+        "question-3",
+        "question_MmPf6a",
+        "question_rXz4b9",
+        "question_tJxNVi",
+        "category_AkfypN",
+        "question_RiRJjR",
+        "question_QCP7EE",
+        "question_pXRKWC",
+        "category_VUmH9q",
+        "question_dRiTgA",
+        "question_QqNyHX",
+        "question_RxGxQc"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "Need help?",
+        "title": "Frequently Asked Questions",
+        "content": ""
+      }
     }
   },
   "order": [

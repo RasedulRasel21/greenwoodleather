@@ -30,15 +30,11 @@
     "product_color_display": "swatch",
     "cart_show_free_shipping_bar": true,
     "social_facebook": "https://www.facebook.com/greenwoodleathergoods/",
+    "social_instagram": "https://www.instagram.com/greenwood_leather/",
     "social_youtube": "https://www.youtube.com/channel/UCjUMuasDNevbLFT1v491l7g",
     "favicon": "shopify://shop_images/tree_logo.png",
     "content_for_index": [],
     "blocks": {
-      "10112818894266855621": {
-        "type": "shopify://apps/ufe-cross-sell-upsell-bundle/blocks/app-embed/588d2ac5-62f3-4ccd-8638-da98ec61fa90",
-        "disabled": false,
-        "settings": {}
-      },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,

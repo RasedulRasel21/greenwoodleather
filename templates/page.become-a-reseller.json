@@ -21,14 +21,14 @@
     "contact-form": {
       "type": "contact",
       "custom_css": [
-        ".prose {line-height: 6px;}"
+        ".prose {line-height: 16px;}"
       ],
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
         "subheading": "",
-        "title": "Contact",
-        "content": "<p>Have a question or suggestion about our products? Need to return or exchange?</p><p>We'd love to hear from you!</p><p>Email: account@greenwoodleather.com.au</p><p>Monday - Friday : 8.00 am - 3.00 pm</p>"
+        "title": "Become a Reseller",
+        "content": "<p>Join our family and help us make a positive difference in the world.</p><p>We're looking for passionate retailers who share our core values. If this sounds like you, then feel free to get in touch! We'd love to hear from you. Please submit an application below and our sales team will respond in 1-2 days. </p>"
       }
     }
   },
