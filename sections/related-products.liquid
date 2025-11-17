@@ -12,6 +12,37 @@
           --product-list-items-per-row: {{ section.settings.products_per_row_desktop }};
         }
       }
+
+      /* White background for product cards */
+      #shopify-section-{{ section.id }} .product-card {
+        background-color: #ffffff;
+        padding: 16px;
+        border-radius: 0;
+        height: 100%;
+      }
+
+      /* Left align product card content */
+      #shopify-section-{{ section.id }} .product-card__info {
+        text-align: left;
+      }
+
+      #shopify-section-{{ section.id }} .product-card__info .v-stack {
+        align-items: flex-start;
+      }
+
+      #shopify-section-{{ section.id }} .product-card__info .justify-items-center {
+        justify-items: flex-start;
+      }
+
+      /* Ensure price list is left aligned */
+      #shopify-section-{{ section.id }} .price-list {
+        justify-content: flex-start;
+      }
+
+      /* Left align swatches */
+      #shopify-section-{{ section.id }} .product-card__info fieldset {
+        justify-content: flex-start;
+      }
     </style>
 
     {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}

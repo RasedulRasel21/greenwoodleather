@@ -62,7 +62,7 @@ Supported variables
         endif
       %}
 
-      <fieldset class="variant-picker__option v-stack gap-2">
+      <fieldset class="variant-picker__option v-stack gap-2{% if size_label_list contains option_downcase %} block-swatch_size{% endif %}">
         <div class="variant-picker__option-info h-stack justify-between gap-2">
           <div class="h-stack gap-1">
             <legend>{{ option.name }}:</legend>

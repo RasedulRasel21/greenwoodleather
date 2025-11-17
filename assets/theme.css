@@ -7986,3 +7986,28 @@ ul {
 
 
 /* Product Page image fix */
+/* custom global css */
+.collection-card__content button{
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.optionValuePrice{
+  display: none;
+}
+.block-swatch_size .block-swatch{
+  flex: 0 0 48%;
+  flex-direction: column;
+}
+.block-swatch_size .optionValueLabel{
+  font-size: 20px;
+  font-weight: 600;
+}
+.block-swatch_size .optionValuePrice{
+  display: block !important;
+}
+.product-info .shopify-product-form {
+  border: 1px solid #cfcfcf;
+  padding: 10px;
+}

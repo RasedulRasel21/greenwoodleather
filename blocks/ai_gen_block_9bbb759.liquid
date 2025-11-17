@@ -1,0 +1,729 @@
+{% doc %}
+  @prompt
+    make a just image testimonial section marquee with arrows where 
+    no gap between images
+    on hover, stop scrolling , add url adding oprion also
+    image size will 350x350, add section title and subtitle option
+    add marquee and slider  both option. when marquee ,there will be no arrows , and on hover stop running
+    
+    when slider, add arrows, no marquee
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-testimonial-section-{{ ai_gen_id }} {
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.section_padding }}px 0;
+  }
+
+  .ai-testimonial-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+
+  .ai-testimonial-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 12px;
+  }
+
+  .ai-testimonial-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+  }
+
+  .ai-testimonial-marquee-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .ai-testimonial-slider-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  .ai-testimonial-marquee__track-{{ ai_gen_id }} {
+    display: flex;
+    width: max-content;
+    gap: 0;
+  }
+
+  .ai-testimonial-marquee__track-{{ ai_gen_id }}.paused {
+    animation-play-state: paused;
+  }
+
+  .ai-testimonial-marquee__track-{{ ai_gen_id }}.scrolling-left {
+    animation: ai-scroll-left-{{ ai_gen_id }} {{ block.settings.scroll_speed }}s linear infinite;
+  }
+
+  .ai-testimonial-marquee__track-{{ ai_gen_id }}.scrolling-right {
+    animation: ai-scroll-right-{{ ai_gen_id }} {{ block.settings.scroll_speed }}s linear infinite;
+  }
+
+  .ai-testimonial-slider__track-{{ ai_gen_id }} {
+    display: flex;
+    gap: 0;
+    transition: transform 0.5s ease;
+  }
+
+  .ai-testimonial-item-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 350px;
+    height: 350px;
+    position: relative;
+  }
+
+  .ai-testimonial-item-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-testimonial-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-testimonial-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-testimonial-arrow-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: {{ block.settings.arrow_background }};
+    color: {{ block.settings.arrow_color }};
+    border: none;
+    width: {{ block.settings.arrow_size }}px;
+    height: {{ block.settings.arrow_size }}px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-testimonial-arrow-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.arrow_hover_background }};
+    color: {{ block.settings.arrow_hover_color }};
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .ai-testimonial-arrow-{{ ai_gen_id }}--left {
+    left: 20px;
+  }
+
+  .ai-testimonial-arrow-{{ ai_gen_id }}--right {
+    right: 20px;
+  }
+
+  .ai-testimonial-arrow-{{ ai_gen_id }} svg {
+    width: calc({{ block.settings.arrow_size }}px * 0.5);
+    height: calc({{ block.settings.arrow_size }}px * 0.5);
+  }
+
+  @keyframes ai-scroll-left-{{ ai_gen_id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes ai-scroll-right-{{ ai_gen_id }} {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-testimonial-item-{{ ai_gen_id }} {
+      width: 250px;
+      height: 250px;
+    }
+
+    .ai-testimonial-slider-{{ ai_gen_id }} {
+      padding: 0 60px;
+    }
+
+    .ai-testimonial-arrow-{{ ai_gen_id }} {
+      width: calc({{ block.settings.arrow_size }}px * 0.8);
+      height: calc({{ block.settings.arrow_size }}px * 0.8);
+    }
+
+    .ai-testimonial-arrow-{{ ai_gen_id }}--left {
+      left: 10px;
+    }
+
+    .ai-testimonial-arrow-{{ ai_gen_id }}--right {
+      right: 10px;
+    }
+
+    .ai-testimonial-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-testimonial-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<testimonial-gallery-{{ ai_gen_id }}
+  class="ai-testimonial-section-{{ ai_gen_id }}"
+  data-mode="{{ block.settings.display_mode }}"
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.title != blank or block.settings.subtitle != blank %}
+    <div class="ai-testimonial-header-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-testimonial-title-{{ ai_gen_id }}">{{ block.settings.title }}</h2>
+      {% endif %}
+      {% if block.settings.subtitle != blank %}
+        <div class="ai-testimonial-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if block.settings.display_mode == 'marquee' %}
+    <div class="ai-testimonial-marquee-{{ ai_gen_id }}">
+      <div class="ai-testimonial-marquee__track-{{ ai_gen_id }} scrolling-{{ block.settings.scroll_direction }}">
+        {% for i in (1..10) %}
+          {% liquid
+            assign image_key = 'image_' | append: i
+            assign url_key = 'url_' | append: i
+            assign image = block.settings[image_key]
+            assign url = block.settings[url_key]
+          %}
+
+          {% if image != blank %}
+            <div class="ai-testimonial-item-{{ ai_gen_id }}">
+              {% if url != blank %}
+                <a href="{{ url }}">
+                  <img
+                    src="{{ image | image_url: width: 700 }}"
+                    alt="{{ image.alt | escape }}"
+                    loading="lazy"
+                    width="350"
+                    height="350"
+                  >
+                </a>
+              {% else %}
+                <img
+                  src="{{ image | image_url: width: 700 }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="350"
+                  height="350"
+                >
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% for i in (1..10) %}
+          {% liquid
+            assign image_key = 'image_' | append: i
+            assign url_key = 'url_' | append: i
+            assign image = block.settings[image_key]
+            assign url = block.settings[url_key]
+          %}
+
+          {% if image != blank %}
+            <div class="ai-testimonial-item-{{ ai_gen_id }}">
+              {% if url != blank %}
+                <a href="{{ url }}">
+                  <img
+                    src="{{ image | image_url: width: 700 }}"
+                    alt="{{ image.alt | escape }}"
+                    loading="lazy"
+                    width="350"
+                    height="350"
+                  >
+                </a>
+              {% else %}
+                <img
+                  src="{{ image | image_url: width: 700 }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="350"
+                  height="350"
+                >
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <div class="ai-testimonial-slider-{{ ai_gen_id }}">
+      <button
+        class="ai-testimonial-arrow-{{ ai_gen_id }} ai-testimonial-arrow-{{ ai_gen_id }}--left"
+        aria-label="Previous slide"
+        data-direction="prev"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="ai-testimonial-slider__track-{{ ai_gen_id }}">
+        {% for i in (1..10) %}
+          {% liquid
+            assign image_key = 'image_' | append: i
+            assign url_key = 'url_' | append: i
+            assign image = block.settings[image_key]
+            assign url = block.settings[url_key]
+          %}
+
+          {% if image != blank %}
+            <div class="ai-testimonial-item-{{ ai_gen_id }}">
+              {% if url != blank %}
+                <a href="{{ url }}">
+                  <img
+                    src="{{ image | image_url: width: 700 }}"
+                    alt="{{ image.alt | escape }}"
+                    loading="lazy"
+                    width="350"
+                    height="350"
+                  >
+                </a>
+              {% else %}
+                <img
+                  src="{{ image | image_url: width: 700 }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="350"
+                  height="350"
+                >
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <button
+        class="ai-testimonial-arrow-{{ ai_gen_id }} ai-testimonial-arrow-{{ ai_gen_id }}--right"
+        aria-label="Next slide"
+        data-direction="next"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  {% endif %}
+</testimonial-gallery-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class TestimonialGallery{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.mode = this.dataset.mode;
+        this.currentIndex = 0;
+      }
+
+      connectedCallback() {
+        if (this.mode === 'marquee') {
+          this.setupMarquee();
+        } else {
+          this.setupSlider();
+        }
+      }
+
+      setupMarquee() {
+        this.track = this.querySelector('.ai-testimonial-marquee__track-{{ ai_gen_id }}');
+        
+        if (!this.track) return;
+
+        this.track.addEventListener('mouseenter', () => {
+          this.track.classList.add('paused');
+        });
+
+        this.track.addEventListener('mouseleave', () => {
+          this.track.classList.remove('paused');
+        });
+      }
+
+      setupSlider() {
+        this.track = this.querySelector('.ai-testimonial-slider__track-{{ ai_gen_id }}');
+        this.items = this.querySelectorAll('.ai-testimonial-item-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('[data-direction="prev"]');
+        this.nextButton = this.querySelector('[data-direction="next"]');
+
+        if (!this.track || this.items.length === 0) return;
+
+        this.prevButton.addEventListener('click', () => {
+          this.slide('prev');
+        });
+
+        this.nextButton.addEventListener('click', () => {
+          this.slide('next');
+        });
+      }
+
+      slide(direction) {
+        const itemWidth = this.items[0].offsetWidth;
+        const totalItems = this.items.length;
+
+        if (direction === 'next') {
+          this.currentIndex = (this.currentIndex + 1) % totalItems;
+        } else {
+          this.currentIndex = (this.currentIndex - 1 + totalItems) % totalItems;
+        }
+
+        const offset = -this.currentIndex * itemWidth;
+        this.track.style.transform = 'translateX(' + offset + 'px)';
+      }
+    }
+
+    customElements.define('testimonial-gallery-{{ ai_gen_id }}', TestimonialGallery{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Image testimonial gallery",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Customer Testimonials"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "See what our customers are saying"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 12,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Display settings"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "Display mode",
+      "options": [
+        {
+          "value": "marquee",
+          "label": "Marquee"
+        },
+        {
+          "value": "slider",
+          "label": "Slider"
+        }
+      ],
+      "default": "marquee"
+    },
+    {
+      "type": "select",
+      "id": "scroll_direction",
+      "label": "Marquee scroll direction",
+      "info": "Only applies to marquee mode",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Marquee scroll speed",
+      "info": "Only applies to marquee mode",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Arrow settings"
+    },
+    {
+      "type": "paragraph",
+      "content": "Arrows only appear in slider mode"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Arrow size",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "arrow_background",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow color",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_background",
+      "label": "Arrow hover background",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "color",
+      "id": "arrow_hover_color",
+      "label": "Arrow hover color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_1",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_2",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_3",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_4",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_5",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_6",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_7",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_7",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_8",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_8",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 9"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_9",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_9",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Image 10"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_10",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "url_10",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image testimonial gallery"
+    }
+  ]
+}
+{% endschema %}

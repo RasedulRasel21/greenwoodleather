@@ -74,31 +74,18 @@
             "selector_style": "block",
             "swatch_selector_style": "swatch",
             "variant_image_options": "",
-            "size_chart_page": ""
+            "size_chart_page": "size-guide"
           }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "disabled": true,
-          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_payment_button": true,
+            "show_payment_button": false,
             "show_gift_card_recipient": true,
             "atc_button_background": "",
             "atc_button_text_color": "",
             "payment_button_background": "",
             "payment_button_text_color": ""
-          }
-        },
-        "description": {
-          "type": "description",
-          "disabled": true,
-          "settings": {
-            "collapse_content": true,
-            "show_below_gallery": false
           }
         },
         "complementary_products": {
@@ -144,15 +131,28 @@
             "page": ""
           }
         },
-        "accordion_69T3Rz": {
-          "type": "accordion",
+        "feature_with_icon_eE79r4": {
+          "type": "feature_with_icon",
           "settings": {
-            "show_below_gallery": true,
-            "icon": "none",
-            "title": "Shipping",
-            "content": "<p>Your shipping method can be selected at checkout. Costs will be calculated prior to payment and will vary by order depending on a number of factors, including but not limited to: item count, package weight, delivery ZIP code, and selected shipping method.</p>",
-            "liquid": "",
-            "page": ""
+            "text": "100% GRAIN LEATHER",
+            "link": "",
+            "icon": "picto-success",
+            "icon_width": 16,
+            "background": "#ffffff",
+            "text_color": "#6b6b6b",
+            "border_color": ""
+          }
+        },
+        "feature_with_icon_eE6E6H": {
+          "type": "feature_with_icon",
+          "settings": {
+            "text": "Fast shipping",
+            "link": "",
+            "icon": "picto-delivery-truck",
+            "icon_width": 16,
+            "background": "#ffffff",
+            "text_color": "#6b6b6b",
+            "border_color": ""
           }
         }
       },
@@ -165,14 +165,13 @@
         "separator",
         "modal_TrrDHN",
         "variant_picker",
-        "quantity_selector",
         "buy_buttons",
-        "description",
         "complementary_products",
         "accordion_aRJHwf",
         "accordion_KM3FeR",
         "accordion_DCKw4p",
-        "accordion_69T3Rz"
+        "feature_with_icon_eE79r4",
+        "feature_with_icon_eE6E6H"
       ],
       "custom_css": [],
       "settings": {
@@ -190,11 +189,157 @@
         "max_image_zoom_level": 3
       }
     },
+    "1763092897efa01d29": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9bbb759_xrjxMw": {
+          "type": "ai_gen_block_9bbb759",
+          "settings": {
+            "title": "Trusted by over 1 Million customers",
+            "subtitle": "",
+            "title_size": 36,
+            "subtitle_size": 16,
+            "title_color": "#1c1c1c",
+            "subtitle_color": "#666666",
+            "display_mode": "marquee",
+            "scroll_direction": "left",
+            "scroll_speed": 30,
+            "section_padding": 40,
+            "background_color": "#ffffff",
+            "arrow_size": 50,
+            "arrow_background": "#ffffff",
+            "arrow_color": "#1c1c1c",
+            "arrow_hover_background": "#1c1c1c",
+            "arrow_hover_color": "#ffffff",
+            "image_1": "shopify://shop_images/shoulder-bag-elora-mini-crossbody-black-leather-bag-default-title-37954063335574.jpg",
+            "url_1": "",
+            "image_2": "shopify://shop_images/Laptop_Bag_Berlin.png",
+            "url_2": "",
+            "image_3": "shopify://shop_images/shoulder-bag-greenwood-oslo-compact-crossbody-olive-green-leather-default-title-37953815150742.jpg",
+            "url_3": "",
+            "image_4": "shopify://shop_images/travel-bag-outback-hair-on-duffle-tan-leather-cowhide-travel-bag-default-title-37944132108438.png",
+            "url_4": "",
+            "url_5": "",
+            "url_6": "",
+            "url_7": "",
+            "url_8": "",
+            "url_9": "",
+            "url_10": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9bbb759_xrjxMw"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "1763090876fa1beb6a": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_3bJkQf": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_3bJkQf"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "collection_list_8C76ep": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_3ryFa3": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "leather-backpacks",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "outline",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "collection_PcidzE": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "leather-shoulder-bags",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "outline",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        },
+        "collection_tqqjfa": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "leather-bucket-bags",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "",
+            "button_text": "View products",
+            "button_link": "",
+            "button_style": "outline",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
+          }
+        }
+      },
+      "block_order": [
+        "collection_3ryFa3",
+        "collection_PcidzE",
+        "collection_tqqjfa"
+      ],
+      "name": "t:sections.collection_list.presets.collection_list.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "image_size": "xs",
+        "show_text_outside": false,
+        "space_items": true,
+        "stack_collections": true,
+        "collections_per_row_desktop": 3,
+        "stack_collections_mobile": true,
+        "collections_per_row_mobile": "1",
+        "subheading": "",
+        "title": "FEATURED COLLECTIONS",
+        "content": ""
+      }
+    },
     "related-products": {
       "type": "related-products",
       "settings": {
         "color_scheme": "",
-        "separate_section_with_border": true,
+        "separate_section_with_border": false,
         "hide_product_information": false,
         "stack_products": false,
         "recommendations_count": 10,
@@ -206,11 +351,66 @@
         "title": "Related products",
         "content": ""
       }
+    },
+    "blocks_XbVnzh": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9bbb759_7ipXkr": {
+          "type": "ai_gen_block_9bbb759",
+          "settings": {
+            "title": "@greenwood",
+            "subtitle": "Follow us @greenwood and tag #lovemyleather for a chance to be featured.",
+            "title_size": 36,
+            "subtitle_size": 16,
+            "title_color": "#1c1c1c",
+            "subtitle_color": "#666666",
+            "display_mode": "slider",
+            "scroll_direction": "left",
+            "scroll_speed": 30,
+            "section_padding": 40,
+            "background_color": "#ffffff",
+            "arrow_size": 50,
+            "arrow_background": "#ffffff",
+            "arrow_color": "#1c1c1c",
+            "arrow_hover_background": "#1c1c1c",
+            "arrow_hover_color": "#ffffff",
+            "image_1": "shopify://shop_images/shoulder-bag-elora-mini-crossbody-black-leather-bag-default-title-37954063335574.jpg",
+            "url_1": "",
+            "image_2": "shopify://shop_images/Laptop_Bag_Berlin.png",
+            "url_2": "",
+            "image_3": "shopify://shop_images/shoulder-bag-greenwood-oslo-compact-crossbody-olive-green-leather-default-title-37953815150742.jpg",
+            "url_3": "",
+            "image_4": "shopify://shop_images/travel-bag-outback-hair-on-duffle-tan-leather-cowhide-travel-bag-default-title-37944132108438.png",
+            "url_4": "",
+            "image_5": "shopify://shop_images/SKU_08650030_13_1a0ab0d3-db70-4408-9a4b-d2ad54ae0490.jpg",
+            "url_5": "",
+            "url_6": "",
+            "url_7": "",
+            "url_8": "",
+            "url_9": "",
+            "url_10": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9bbb759_7ipXkr"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
     }
   },
   "order": [
     "product_feature_banner_X4eAdr",
     "main",
-    "related-products"
+    "1763092897efa01d29",
+    "1763090876fa1beb6a",
+    "collection_list_8C76ep",
+    "related-products",
+    "blocks_XbVnzh"
   ]
 }

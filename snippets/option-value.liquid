@@ -166,7 +166,8 @@ Thumbnail specific parameters:
         <span class="block-swatch__color {% if settings.round_color_swatches %}rounded-full{% endif %} {% if white_label == downcase_label %}border{% endif %}" style="{{ swatch_style }}"></span>
       {%- endif -%}
 
-      <span>{{ label | default: value }}</span>
+      <span class="optionValueLabel">{{ label | default: value }}</span>
+      <span class="optionValuePrice">{{ option_value.variant.price | money }}</span>
     </{{ option_value_tag }}>
 
   {%- when 'swatch' -%}

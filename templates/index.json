@@ -161,9 +161,9 @@
             "content_position": "place-self-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Backpacks",
             "button_link": "",
-            "button_style": "solid",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -178,9 +178,9 @@
             "content_position": "place-self-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Briefcases",
             "button_link": "",
-            "button_style": "solid",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -195,26 +195,9 @@
             "content_position": "place-self-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Bucket bags",
             "button_link": "",
-            "button_style": "solid",
-            "overlay_color": "#000000",
-            "overlay_opacity": 30
-          }
-        },
-        "collection_ttbYtV": {
-          "type": "collection",
-          "disabled": true,
-          "settings": {
-            "color_scheme": "scheme-4",
-            "collection": "leather-duffle-bags",
-            "expand_collection": false,
-            "content_position": "place-self-end-start text-start",
-            "subheading": "",
-            "title": "",
-            "button_text": "View products",
-            "button_link": "",
-            "button_style": "solid",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -223,8 +206,7 @@
       "block_order": [
         "collection_TecR4i",
         "collection_pQWnQW",
-        "collection_VyfwjK",
-        "collection_ttbYtV"
+        "collection_VyfwjK"
       ],
       "custom_css": [],
       "name": "t:sections.collection_list.presets.collection_list.name",
@@ -317,9 +299,9 @@
             "content_position": "place-self-end-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Brifcases",
             "button_link": "shopify://collections/leather-briefcases",
-            "button_style": "outline",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -334,9 +316,9 @@
             "content_position": "place-self-end-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Duffle bags",
             "button_link": "shopify://collections/leather-bucket-bags",
-            "button_style": "outline",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -351,9 +333,9 @@
             "content_position": "place-self-end-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Backpacks",
             "button_link": "shopify://collections/leather-backpacks",
-            "button_style": "outline",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -465,9 +447,8 @@
       "blocks": {
         "subheading-1": {
           "type": "subheading",
-          "disabled": true,
           "settings": {
-            "text": "New product"
+            "text": "Always with the aim to make you happy"
           }
         },
         "heading-1": {

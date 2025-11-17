@@ -18,7 +18,52 @@ Supported variables
 * payment_button_background: the color of the dynamic payment button
 * form_id: if specified, define the form ID linked to this input
 {%- endcomment -%}
+<style>
+.promo-banner {
+  text-align: center;
+  font-family: sans-serif;
+  margin: 10px 0;
+}
 
+.promo-prices {
+  font-size: 18px;
+}
+
+.promo-prices span {
+  margin: 0 5px;
+}
+
+.promo-prices .new-price {
+  color: #54744d;
+  font-weight: 700;
+}
+
+.promo-code-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.promo-code {
+  padding: 4px 10px;
+  color: white;
+  background: #54744d;
+  cursor: pointer;
+  animation: dashMove 1s linear infinite;
+}
+
+.copy-message {
+  display: none;
+  color: green;
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+</style>
 {%- if product != blank -%}
   {%- liquid
     assign variant_picker_block = section.blocks | where: 'type', 'variant_picker' | first
@@ -78,6 +123,30 @@ Supported variables
             </div>
           </gift-card-recipient>
         {%- endif -%}
+
+        {% assign regular_price = product.price | money_without_currency | plus: 0 %}
+        {% assign discount_amount = regular_price | times: 0.20 %}
+        {% assign discounted_price = regular_price | minus: discount_amount %}
+
+        <div class="promo-banner">
+          <div class="promo-prices">
+            <span>WAS: 
+              <span class="old-price">${{ regular_price }}</span>
+            </span>
+            <span> TODAY: 
+              <span class="new-price">${{ discounted_price | round: 2 }}</span>
+            </span>
+          </div>
+
+          <div class="promo-code-wrapper">
+            <span>ENTER CODE</span>
+            <div class="promo-code" id="copyCode">TAKE20</div>
+            <span>AT CHECKOUT</span>
+          </div>
+
+          <span class="copy-message" id="copyMsg">Copied!</span>
+        </div>
+
 
         <buy-buttons class="buy-buttons {% if show_payment_button %}buy-buttons--has-dynamic{% endif %}" form="{{ form_id }}">
           {%- if product.selected_or_first_available_variant.available == false or show_payment_button and atc_button_background == blank and atc_button_text_color == blank -%}
