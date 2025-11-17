@@ -8011,3 +8011,6 @@ ul {
   border: 1px solid #cfcfcf;
   padding: 10px;
 }
+product-recommendations .product-list{
+  column-gap: 10px !important;
+}

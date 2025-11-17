@@ -536,6 +536,9 @@ Supported variables
                 {%- render 'icon' with 'chevron-right' -%}
               </a>
             {%- endif -%}
+
+          {%- when 'product_bundle' -%}
+            {%- render 'product-bundle', block: block, product: product -%}
         {%- endcase -%}
       {%- endcapture -%}
       

@@ -154,6 +154,21 @@
             "text_color": "#6b6b6b",
             "border_color": ""
           }
+        },
+        "product_bundle_tfnejy": {
+          "type": "product_bundle",
+          "settings": {
+            "bundle_title": "BUILD YOUR BUNDLE",
+            "bundle_product_1": "circle-luxe-brown-leather-crossbody-bag-copy",
+            "product_1_label": "Product 1",
+            "bundle_product_2": "elora-mini-crossbody-black-leather-bag",
+            "product_2_label": "Product 2",
+            "discount_percentage": 20,
+            "discount_code": "TAKE20",
+            "promo_background": "#54744d",
+            "promo_text_color": "#ffffff",
+            "new_price_color": "#54744d"
+          }
         }
       },
       "block_order": [
@@ -171,7 +186,8 @@
         "accordion_KM3FeR",
         "accordion_DCKw4p",
         "feature_with_icon_eE79r4",
-        "feature_with_icon_eE6E6H"
+        "feature_with_icon_eE6E6H",
+        "product_bundle_tfnejy"
       ],
       "custom_css": [],
       "settings": {
@@ -274,9 +290,9 @@
             "content_position": "place-self-end-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Backpacks",
             "button_link": "",
-            "button_style": "outline",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -290,9 +306,9 @@
             "content_position": "place-self-end-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Shoulder bags",
             "button_link": "",
-            "button_style": "outline",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }
@@ -306,9 +322,9 @@
             "content_position": "place-self-end-center text-center",
             "subheading": "",
             "title": "",
-            "button_text": "View products",
+            "button_text": "Backpacks",
             "button_link": "",
-            "button_style": "outline",
+            "button_style": "link",
             "overlay_color": "#000000",
             "overlay_opacity": 30
           }

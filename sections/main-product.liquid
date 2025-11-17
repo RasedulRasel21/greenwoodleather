@@ -1807,6 +1807,75 @@ quick buy information in a template, that will be extracted in JS, which ensures
           "default": "More information"
         }
       ]
+    },
+    {
+      "type": "product_bundle",
+      "name": "Product Bundle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "bundle_title",
+          "label": "Bundle Title",
+          "default": "BUILD YOUR BUNDLE"
+        },
+        {
+          "type": "product",
+          "id": "bundle_product_1",
+          "label": "Bundle Product 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "product_1_label",
+          "label": "Product 1 Label",
+          "default": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "bundle_product_2",
+          "label": "Bundle Product 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "product_2_label",
+          "label": "Product 2 Label",
+          "default": "Product 2"
+        },
+        {
+          "type": "range",
+          "id": "discount_percentage",
+          "label": "Discount Percentage",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 20
+        },
+        {
+          "type": "text",
+          "id": "discount_code",
+          "label": "Discount Code",
+          "default": "TAKE20"
+        },
+        {
+          "type": "color",
+          "id": "promo_background",
+          "label": "Promo Code Background",
+          "default": "#54744d"
+        },
+        {
+          "type": "color",
+          "id": "promo_text_color",
+          "label": "Promo Code Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "new_price_color",
+          "label": "New Price Color",
+          "default": "#54744d"
+        }
+      ]
     }
   ]
 }
