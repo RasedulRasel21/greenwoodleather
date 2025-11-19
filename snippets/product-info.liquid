@@ -557,6 +557,38 @@ Supported variables
               </honest-pricing-drawer>
             {%- endif -%}
 
+          {%- when 'feature_with_drawer' -%}
+            {%- if block.settings.text != blank -%}
+              {%- assign feature_drawer_id = 'feature-drawer-' | append: block.id -%}
+
+              <button class="feature-with-drawer" data-drawer-id="{{ feature_drawer_id }}">
+                {%- if block.settings.custom_icon != blank -%}
+                  {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
+                  {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.custom_icon.width }}{%- endcapture -%}
+                  {%- capture style -%}--image-max-width: {{ block.settings.icon_width }}px{%- endcapture -%}
+                  {{- block.settings.custom_icon | image_url: width: block.settings.custom_icon.width | image_tag: sizes: sizes, widths: widths, class: 'feature-with-drawer__icon-image', style: style -}}
+                {%- else -%}
+                  {%- render 'icon' with block.settings.icon, width: block.settings.icon_width, class: 'feature-with-drawer__icon' -%}
+                {%- endif -%}
+
+                <span class="feature-with-drawer__text">{{ block.settings.text }}</span>
+
+                <svg class="feature-with-drawer__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <feature-drawer>
+                {%- render 'feature-drawer',
+                  drawer_id: feature_drawer_id,
+                  drawer_title: block.settings.drawer_title,
+                  drawer_image: block.settings.drawer_image,
+                  drawer_content: block.settings.drawer_content,
+                  drawer_bottom_image: block.settings.drawer_bottom_image
+                -%}
+              </feature-drawer>
+            {%- endif -%}
+
           {%- when 'product_bundle' -%}
             {%- render 'product-bundle', block: block, product: product -%}
         {%- endcase -%}

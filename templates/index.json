@@ -110,6 +110,7 @@
     },
     "countdown": {
       "type": "countdown",
+      "custom_css": [],
       "settings": {
         "color_scheme": "scheme-3",
         "separate_section_with_border": false,

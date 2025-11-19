@@ -1,0 +1,345 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+FEATURE DRAWER
+----------------------------------------------------------------------------------------------------------------------
+
+This snippet renders a customizable feature drawer with image and content
+
+********************************************
+Supported variables
+********************************************
+
+* drawer_id: unique identifier for the drawer
+* drawer_title: title displayed in drawer header
+* drawer_image: main image in drawer
+* drawer_content: main content text
+* drawer_bottom_image: bottom image displayed at full width
+{%- endcomment -%}
+
+<div id="{{ drawer_id }}" class="feature-drawer">
+  <div class="feature-drawer__overlay"></div>
+  <div class="feature-drawer__content">
+    <div class="feature-drawer__header">
+      <h2 class="feature-drawer__title">{{ drawer_title }}</h2>
+      <button class="feature-drawer__close" aria-label="Close drawer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="feature-drawer__body">
+      <div class="feature-drawer__section">
+        {%- if drawer_image != blank -%}
+          <div class="feature-drawer__image-container">
+            {{- drawer_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '600px', widths: '400,600,800,1000,1200', class: 'feature-drawer__image' -}}
+          </div>
+        {%- endif -%}
+
+        {%- if drawer_content != blank -%}
+          <div class="feature-drawer__text">
+            {{ drawer_content }}
+          </div>
+        {%- endif -%}
+
+        {%- if drawer_bottom_image != blank -%}
+          <div class="feature-drawer__bottom-image-container">
+            {{- drawer_bottom_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '600px', widths: '400,600,800,1000,1200', class: 'feature-drawer__bottom-image' -}}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .feature-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .feature-drawer.is-open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .feature-drawer__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .feature-drawer.is-open .feature-drawer__overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .feature-drawer__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    z-index: 1;
+  }
+
+  .feature-drawer.is-open .feature-drawer__content {
+    transform: translateX(0);
+  }
+
+  .feature-drawer__header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 24px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .feature-drawer__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .feature-drawer__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: color 0.2s ease;
+  }
+
+  .feature-drawer__close:hover {
+    color: #1a1a1a;
+  }
+
+  .feature-drawer__body {
+    padding: 32px 24px;
+  }
+
+  .feature-drawer__section {
+    text-align: center;
+  }
+
+  .feature-drawer__image-container {
+    margin: 0 0 32px 0;
+  }
+
+  .feature-drawer__image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .feature-drawer__text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #4b5563;
+    margin: 0 0 40px 0;
+    text-align: justify;
+  }
+
+  .feature-drawer__bottom-image-container {
+    margin-top: 40px;
+  }
+
+  .feature-drawer__bottom-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .feature-drawer__content {
+      max-width: 100%;
+    }
+
+    .feature-drawer__title {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<script>
+  // Only define the class once
+  if (!customElements.get('feature-drawer')) {
+    class FeatureDrawer extends HTMLElement {
+      constructor() {
+        super();
+        this.drawer = this.querySelector('.feature-drawer');
+        this.closeBtn = this.querySelector('.feature-drawer__close');
+        this.overlay = this.querySelector('.feature-drawer__overlay');
+        this.drawerId = this.drawer?.id;
+
+        this.closeBtn?.addEventListener('click', () => this.close());
+        this.overlay?.addEventListener('click', () => this.close());
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.drawer?.classList.contains('is-open')) {
+            this.close();
+          }
+        });
+
+        // Register this drawer instance
+        if (this.drawerId) {
+          if (!window.featureDrawers) {
+            window.featureDrawers = {};
+          }
+          window.featureDrawers[this.drawerId] = this;
+        }
+      }
+
+      open() {
+        console.log('Opening drawer:', this.drawerId);
+
+        // Close any other open drawers first
+        if (window.featureDrawers) {
+          Object.values(window.featureDrawers).forEach(drawer => {
+            if (drawer !== this) {
+              drawer.close();
+            }
+          });
+        }
+
+        this.drawer?.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+
+        // Set header z-index to 0
+        const header = document.querySelector('.shopify-section--header');
+        if (header) {
+          header.style.zIndex = '0';
+        }
+      }
+
+      close() {
+        console.log('Closing drawer:', this.drawerId);
+        this.drawer?.classList.remove('is-open');
+        document.body.style.overflow = '';
+
+        // Restore header z-index
+        const header = document.querySelector('.shopify-section--header');
+        if (header) {
+          header.style.zIndex = '';
+        }
+      }
+    }
+
+    customElements.define('feature-drawer', FeatureDrawer);
+  }
+
+  // Ensure all drawers are registered (run after each snippet loads)
+  setTimeout(() => {
+    document.querySelectorAll('feature-drawer').forEach(element => {
+      const drawerDiv = element.querySelector('.feature-drawer');
+      const drawerId = drawerDiv?.id;
+
+      if (drawerId && (!window.featureDrawers || !window.featureDrawers[drawerId])) {
+        console.log('Manually registering drawer:', drawerId);
+
+        if (!window.featureDrawers) {
+          window.featureDrawers = {};
+        }
+
+        // Manually create the drawer instance
+        const drawer = {
+          drawer: drawerDiv,
+          drawerId: drawerId,
+          closeBtn: element.querySelector('.feature-drawer__close'),
+          overlay: element.querySelector('.feature-drawer__overlay'),
+
+          open: function() {
+            console.log('Opening drawer:', this.drawerId);
+
+            // Close any other open drawers first
+            if (window.featureDrawers) {
+              Object.values(window.featureDrawers).forEach(d => {
+                if (d !== this && d.drawer) {
+                  d.close();
+                }
+              });
+            }
+
+            this.drawer?.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+
+            const header = document.querySelector('.shopify-section--header');
+            if (header) {
+              header.style.zIndex = '0';
+            }
+          },
+
+          close: function() {
+            console.log('Closing drawer:', this.drawerId);
+            this.drawer?.classList.remove('is-open');
+            document.body.style.overflow = '';
+
+            const header = document.querySelector('.shopify-section--header');
+            if (header) {
+              header.style.zIndex = '';
+            }
+          }
+        };
+
+        // Add event listeners
+        drawer.closeBtn?.addEventListener('click', () => drawer.close());
+        drawer.overlay?.addEventListener('click', () => drawer.close());
+
+        window.featureDrawers[drawerId] = drawer;
+      }
+    });
+
+    console.log('Total registered drawers:', Object.keys(window.featureDrawers || {}).length);
+  }, 100);
+
+  // Handle button clicks (only add listener once)
+  if (!window.featureDrawerClickHandlerAdded) {
+    window.featureDrawerClickHandlerAdded = true;
+
+    document.addEventListener('click', function(e) {
+      const button = e.target.closest('[data-drawer-id]');
+      if (button) {
+        e.preventDefault();
+        const drawerId = button.getAttribute('data-drawer-id');
+
+        console.log('Button clicked, drawer ID:', drawerId);
+        console.log('Available drawers:', Object.keys(window.featureDrawers || {}));
+
+        // Find the drawer instance from the registry
+        if (window.featureDrawers && window.featureDrawers[drawerId]) {
+          window.featureDrawers[drawerId].open();
+        } else {
+          console.error('Drawer not found:', drawerId);
+        }
+      }
+    });
+  }
+</script>

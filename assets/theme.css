@@ -8014,3 +8014,10 @@ ul {
 product-recommendations .product-list{
   column-gap: 10px !important;
 }
+.mega-menu__linklist .h6{
+  font-weight: 700;
+}
+.shopify-section--countdown .section-spacing {
+    padding-block-start: 40px !important;
+    padding-block-end: 40px !important;
+}

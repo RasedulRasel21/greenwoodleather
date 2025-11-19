@@ -81,7 +81,7 @@
           "settings": {
             "hide_sold_out_variants": false,
             "selector_style": "block",
-            "swatch_selector_style": "swatch",
+            "swatch_selector_style": "variant_image",
             "variant_image_options": "",
             "size_chart_page": "size-guide"
           }
@@ -95,6 +95,42 @@
             "atc_button_text_color": "",
             "payment_button_background": "",
             "payment_button_text_color": ""
+          }
+        },
+        "feature_with_drawer_7K9kWg": {
+          "type": "feature_with_drawer",
+          "settings": {
+            "text": "Premium crafted leather",
+            "icon": "picto-star",
+            "icon_width": 24,
+            "drawer_title": "Premium crafted leather",
+            "drawer_image": "shopify://shop_images/Homepage_desktop_banner_2025-10-31.webp",
+            "drawer_content": "<p>At The Greenwood Brand, we are absolutely fascinated by leather. You have to smell it, you have to feel it, only then do you know if you have a beautiful piece of leather in your hands. To create that soft, supple leather again and again and then to transform it into a stylish and functional leather bag that you can enjoy for years on end, takes a lot of work. And that is exactly what we do at The Greenwood Brand. Creating this unique leather requires craftsmanship, attention and passion. For this we work together with several suppliers from India, our leather partners. Through years of cooperation, daily contact and frequent factory visits, together we are able to build something very beautiful. For us it is not a goal, but a requirement that every link in the chain benefits from the production of our bags.</p>",
+            "drawer_bottom_image": "shopify://shop_images/product-usps-1-bottom_2dff23db-11e6-4159-ab29-3d3c52e83b18_1.webp"
+          }
+        },
+        "feature_with_drawer_cJ373p": {
+          "type": "feature_with_drawer",
+          "settings": {
+            "text": "Sustainable products",
+            "icon": "picto-delivery-truck",
+            "icon_width": 24,
+            "drawer_title": "Fast shipping",
+            "drawer_image": "shopify://shop_images/Homepage_desktop_banner_2025-10-31.webp",
+            "drawer_content": "<p>At The Greenwood Brand, we are absolutely fascinated by leather. You have to smell it, you have to feel it, only then do you know if you have a beautiful piece of leather in your hands. To create that soft, supple leather again and again and then to transform it into a stylish and functional leather bag that you can enjoy for years on end, takes a lot of work. And that is exactly what we do at The Greenwood Brand. Creating this unique leather requires craftsmanship, attention and passion. For this we work together with several suppliers from India, our leather partners. Through years of cooperation, daily contact and frequent factory visits, together we are able to build something very beautiful. For us it is not a goal, but a requirement that every link in the chain benefits from the production of our bags.</p>",
+            "drawer_bottom_image": "shopify://shop_images/product-usps-1-bottom_2dff23db-11e6-4159-ab29-3d3c52e83b18_1.webp"
+          }
+        },
+        "feature_with_drawer_kRTLMV": {
+          "type": "feature_with_drawer",
+          "settings": {
+            "text": "Sustainable products",
+            "icon": "picto-recycle",
+            "icon_width": 24,
+            "drawer_title": "Sustainable products",
+            "drawer_image": "shopify://shop_images/Homepage_desktop_banner_2025-10-31.webp",
+            "drawer_content": "<p>At The Greenwood Brand, we are absolutely fascinated by leather. You have to smell it, you have to feel it, only then do you know if you have a beautiful piece of leather in your hands. To create that soft, supple leather again and again and then to transform it into a stylish and functional leather bag that you can enjoy for years on end, takes a lot of work. And that is exactly what we do at The Greenwood Brand. Creating this unique leather requires craftsmanship, attention and passion. For this we work together with several suppliers from India, our leather partners. Through years of cooperation, daily contact and frequent factory visits, together we are able to build something very beautiful. For us it is not a goal, but a requirement that every link in the chain benefits from the production of our bags.</p>",
+            "drawer_bottom_image": "shopify://shop_images/product-usps-1-bottom_2dff23db-11e6-4159-ab29-3d3c52e83b18_1.webp"
           }
         },
         "complementary_products": {
@@ -140,28 +176,10 @@
             "page": ""
           }
         },
-        "feature_with_icon_eE79r4": {
-          "type": "feature_with_icon",
+        "text_LqBgaa": {
+          "type": "text",
           "settings": {
-            "text": "100% GRAIN LEATHER",
-            "link": "",
-            "icon": "picto-success",
-            "icon_width": 16,
-            "background": "#ffffff",
-            "text_color": "#6b6b6b",
-            "border_color": ""
-          }
-        },
-        "feature_with_icon_eE6E6H": {
-          "type": "feature_with_icon",
-          "settings": {
-            "text": "Fast shipping",
-            "link": "",
-            "icon": "picto-delivery-truck",
-            "icon_width": 16,
-            "background": "#ffffff",
-            "text_color": "#6b6b6b",
-            "border_color": ""
+            "text": "{{ product.metafields.custom.short_description | metafield_tag }}"
           }
         },
         "product_bundle_tfnejy": {
@@ -191,12 +209,14 @@
         "modal_TrrDHN",
         "variant_picker",
         "buy_buttons",
+        "feature_with_drawer_7K9kWg",
+        "feature_with_drawer_cJ373p",
+        "feature_with_drawer_kRTLMV",
         "complementary_products",
         "accordion_aRJHwf",
         "accordion_KM3FeR",
         "accordion_DCKw4p",
-        "feature_with_icon_eE79r4",
-        "feature_with_icon_eE6E6H",
+        "text_LqBgaa",
         "product_bundle_tfnejy"
       ],
       "custom_css": [],
@@ -258,6 +278,7 @@
       "block_order": [
         "ai_gen_block_9bbb759_xrjxMw"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": false,
@@ -428,12 +449,78 @@
         "remove_vertical_spacing": false,
         "remove_horizontal_spacing": false
       }
+    },
+    "image_with_text_7tYkbM": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_rrBpJh": {
+          "type": "heading",
+          "settings": {
+            "text": "Wax Pull Up Leather",
+            "heading_tag": "h3"
+          }
+        },
+        "richtext_WQCABA": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>This is The Greenwood Brand's most commonly used leather. After pressing, the leather is manually colored with aniline color soﬀes that are impregnated with natural oils and waxes instead of dyes and pigments. This soft finish ensures that the fabrics do not stay on the skin, but instead soak into the pores of the skin creating the natural vintage look. Because this leather is only waxed and not sprayed with color, it is a very durable product and retains its quality and color.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rrBpJh",
+        "richtext_WQCABA"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/front-facing-lifestyle-image-of-wilson-leather-weekender-bag-at-australian-beach.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_be8XRf": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_wLfxXg": {
+          "type": "heading",
+          "settings": {
+            "text": "Made by true Master Leatherworkers",
+            "heading_tag": "h3"
+          }
+        },
+        "richtext_ewXtTp": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Every bag from The Greenwood Brand tells a story of genuine craftsmanship. Made from high-quality full-grain leather, carefully selected for its natural beauty and durability. As a family business, we believe in lasting relationships – with our customers and our makers alike.</p><p>In our workshops in India, where we’ve worked with trusted partners for decades, the same spirit of respect and dedication defines everything we do. Here, traditional craftsmanship meets modern innovation. Each design is hand-finished, stitched, and inspected with precision.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wLfxXg",
+        "richtext_ewXtTp"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/shoulder-bag-leather-shoulder-bag-bianca-cognac-default-title-36850994806934.jpg",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
     }
   },
   "order": [
     "product_feature_banner_X4eAdr",
     "main",
     "1763092897efa01d29",
+    "image_with_text_7tYkbM",
+    "image_with_text_be8XRf",
     "1763090876fa1beb6a",
     "related-products",
     "collection_list_8C76ep",

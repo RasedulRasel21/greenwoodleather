@@ -45,7 +45,7 @@ Supported variables
 
         assign swatch_count = option.values | map: 'swatch' | compact | size
 
-        if swatch_count > 0 and swatch_selector_style != 'none'
+        if swatch_count > 0 and swatch_selector_style != 'none' and swatch_selector_style != 'variant_image'
           # Use the swatch selector type only if we have at least one swatch and a supported swatch selector type
           assign resolved_option_selector_style = swatch_selector_style
         endif
@@ -53,8 +53,16 @@ Supported variables
         # Implementation note: if the option value has no native swatch, BUT that the option name matches a hardcoded list of color names,
         # we fallback to the legacy config-based system. This allows to keep compatibility with stores that were using the config-based, and
         # allow those merchants to upgrade to the new system at their own pace.
-        if swatch_count == 0 and color_label_list contains option_downcase and swatch_selector_style != 'none'
+        if swatch_count == 0 and color_label_list contains option_downcase and swatch_selector_style != 'none' and swatch_selector_style != 'variant_image'
           assign resolved_option_selector_style = swatch_selector_style
+        endif
+
+        # Check if variant_image is selected as swatch_selector_style
+        if swatch_selector_style == 'variant_image'
+          # Apply to options with swatches or color options
+          if swatch_count > 0 or color_label_list contains option_downcase
+            assign resolved_option_selector_style = 'variant_image'
+          endif
         endif
 
         if variant_image_options contains option_downcase

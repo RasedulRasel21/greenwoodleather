@@ -69,6 +69,49 @@
   .honest-pricing-guarantee__link:hover {
     color: #1d4ed8;
   }
+
+  .feature-with-drawer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 6px 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+  }
+
+  .feature-with-drawer__icon,
+  .feature-with-drawer__icon-image {
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  .feature-with-drawer__icon-image {
+    max-width: 24px;
+    height: auto;
+  }
+
+  .feature-with-drawer__text {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .feature-with-drawer__arrow {
+    flex-shrink: 0;
+    color: #6b7280;
+    transition: transform 0.2s ease;
+  }
+
+  .feature-with-drawer:hover .feature-with-drawer__arrow {
+    transform: translateX(4px);
+  }
 </style>
 
 {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
@@ -550,6 +593,10 @@ quick buy information in a template, that will be extracted in JS, which ensures
             {
               "value": "block_swatch",
               "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_style_options.block_swatch"
+            },
+            {
+              "value": "variant_image",
+              "label": "Variant Image"
             },
             {
               "value": "none",
@@ -1868,6 +1915,114 @@ quick buy information in a template, that will be extracted in JS, which ensures
           "id": "drawer_image",
           "label": "Drawer Image",
           "info": "Image displayed in the pricing drawer"
+        }
+      ]
+    },
+    {
+      "type": "feature_with_drawer",
+      "name": "Feature with Drawer",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Display a clickable feature box that opens a detailed drawer"
+        },
+        {
+          "type": "header",
+          "content": "Button Settings"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Premium Crafted Leather"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "picto-award-gift",
+              "label": "Award Gift"
+            },
+            {
+              "value": "picto-box",
+              "label": "Box"
+            },
+            {
+              "value": "picto-delivery-truck",
+              "label": "Delivery Truck"
+            },
+            {
+              "value": "picto-leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "picto-recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "picto-shield",
+              "label": "Shield"
+            },
+            {
+              "value": "picto-success",
+              "label": "Success"
+            },
+            {
+              "value": "picto-star",
+              "label": "Star"
+            }
+          ],
+          "default": "picto-star"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom Icon",
+          "info": "Overrides the icon selection above"
+        },
+        {
+          "type": "range",
+          "id": "icon_width",
+          "min": 16,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "label": "Icon Width",
+          "default": 24
+        },
+        {
+          "type": "header",
+          "content": "Drawer Content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "drawer_title",
+          "label": "Drawer Title",
+          "default": "Premium crafted leather"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_image",
+          "label": "Drawer Image",
+          "info": "Main image displayed in the drawer"
+        },
+        {
+          "type": "richtext",
+          "id": "drawer_content",
+          "label": "Drawer Content",
+          "default": "<p>Add your detailed content here. This text will be displayed in the drawer when the user clicks on the feature.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_bottom_image",
+          "label": "Bottom Image",
+          "info": "Full width image displayed at the bottom of the drawer (e.g., badges or certifications)"
         }
       ]
     },
