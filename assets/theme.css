@@ -2178,6 +2178,10 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
   gap: 1.25rem;
   display: grid;
   position: relative;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 0;
+  height: 100%;
 }
 
 .product-card__figure {
@@ -2341,8 +2345,8 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
   --product-list-card-width: calc(100% / var(--product-list-calculated-items-per-row)  - var(--product-list-calculated-column-gap, 0px) * (var(--product-list-calculated-items-per-row)  - 1) / var(--product-list-calculated-items-per-row));
   grid: auto / repeat(auto-fit, var(--product-list-card-width));
   align-items: start;
-  column-gap: var(--product-list-calculated-column-gap);
-  row-gap: var(--product-list-calculated-row-gap);
+  column-gap: 10px;
+  row-gap: 20px;
   display: grid;
 }
 

@@ -13,9 +13,10 @@
       "type": "collection-banner",
       "settings": {
         "color_scheme": "scheme-4",
+        "image": "shopify://shop_images/Homepage_desktop_banner_2025-10-31.webp",
         "image_size": "auto",
         "allow_transparent_header": false,
-        "show_image": false,
+        "show_image": true,
         "reveal": true,
         "enable_parallax": true,
         "show_collection_title": true,
