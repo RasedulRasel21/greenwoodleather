@@ -35,6 +35,40 @@
       {%- endif -%}
     }
   }
+
+  .honest-pricing-guarantee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .honest-pricing-guarantee__icon {
+    flex-shrink: 0;
+  }
+
+  .honest-pricing-guarantee__text {
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .honest-pricing-guarantee__link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2563EB;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+
+  .honest-pricing-guarantee__link:hover {
+    color: #1d4ed8;
+  }
 </style>
 
 {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
@@ -1805,6 +1839,35 @@ quick buy information in a template, that will be extracted in JS, which ensures
           "id": "text",
           "label": "t:sections.main_product.blocks.more_information.text",
           "default": "More information"
+        }
+      ]
+    },
+    {
+      "type": "honest_pricing_guarantee",
+      "name": "Honest Pricing Guarantee",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Display an honest pricing guarantee badge with a link to open a detailed drawer"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Honest Pricing Guarantee"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "More info"
+        },
+        {
+          "type": "image_picker",
+          "id": "drawer_image",
+          "label": "Drawer Image",
+          "info": "Image displayed in the pricing drawer"
         }
       ]
     },

@@ -1,0 +1,352 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+HONEST PRICING DRAWER
+----------------------------------------------------------------------------------------------------------------------
+
+This snippet renders the honest pricing guarantee drawer content
+
+********************************************
+Supported variables
+********************************************
+
+* drawer_id: unique identifier for the drawer
+{%- endcomment -%}
+
+<div id="{{ drawer_id }}" class="honest-pricing-drawer">
+  <div class="honest-pricing-drawer__overlay"></div>
+  <div class="honest-pricing-drawer__content">
+    <div class="honest-pricing-drawer__header">
+      <h2 class="honest-pricing-drawer__title">Honest Prices, Guaranteed.</h2>
+      <button class="honest-pricing-drawer__close" aria-label="Close drawer">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="honest-pricing-drawer__body">
+      <div class="honest-pricing-drawer__section">
+        <p class="honest-pricing-drawer__intro">
+          We are committed to offering you the best value, which is why we price our products honestly 365 days a year.
+        </p>
+
+        {%- if drawer_image != blank -%}
+          <div class="honest-pricing-drawer__image-container">
+            {{- drawer_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '600px', widths: '400,600,800,1000,1200', class: 'honest-pricing-drawer__image' -}}
+          </div>
+        {%- endif -%}
+
+        <div class="honest-pricing-drawer__comparison">
+          <div class="honest-pricing-drawer__comparison-labels">
+            <div class="honest-pricing-drawer__label">Greenwoodleather<br>Price</div>
+            <div class="honest-pricing-drawer__label">Typical<br>DTC Price</div>
+            <div class="honest-pricing-drawer__label">Traditional<br>Retail</div>
+          </div>
+
+          <div class="honest-pricing-drawer__scale-container">
+            <div class="honest-pricing-drawer__scale-label honest-pricing-drawer__scale-label--left">Cost</div>
+            <div class="honest-pricing-drawer__scale">
+              <div class="honest-pricing-drawer__scale-bar"></div>
+              <div class="honest-pricing-drawer__marker" style="left: 0%">1x</div>
+              <div class="honest-pricing-drawer__marker" style="left: 50%">2x</div>
+              <div class="honest-pricing-drawer__marker" style="left: 66.6%">3x</div>
+              <div class="honest-pricing-drawer__marker" style="left: 75%">4x</div>
+              <div class="honest-pricing-drawer__marker" style="left: 100%">5x</div>
+            </div>
+            <div class="honest-pricing-drawer__scale-label honest-pricing-drawer__scale-label--right">Markup</div>
+          </div>
+        </div>
+
+        <p class="honest-pricing-drawer__text">
+          Because we price our products honestly 365 days a year, we can guarantee you're getting the lowest price available. No gimmicks, no discount tricks. We simply believe that offering customers great products at a great value is the foundation to long-term business success and is the right thing to do.
+        </p>
+      </div>
+
+      <div class="honest-pricing-drawer__section">
+        <h3 class="honest-pricing-drawer__section-title">Responsive Production</h3>
+        <p class="honest-pricing-drawer__text">
+          All Greenwoodleather products are handcrafted in small batches 50/52 weeks per year. By producing in small lots we are able to minimize waste and overhang and churn inventory more quickly. As a result, we don't have to build the cost of "excess inventory" into our prices, allowing us to pass along those savings to you.
+        </p>
+      </div>
+
+      <div class="honest-pricing-drawer__section">
+        <h3 class="honest-pricing-drawer__section-title">Lean Business Model</h3>
+        <p class="honest-pricing-drawer__text">
+          Greenwoodleather was originally "bootstrapped" with our limited personal savings, which taught us how to be smart with our money. We keep fixed costs low and do almost everything in-house with a hard working team who believes in the mission, opting for equity ownership over high salaries.
+        </p>
+      </div>
+
+      <div class="honest-pricing-drawer__section">
+        <h3 class="honest-pricing-drawer__section-title">Long-Term Thinking</h3>
+        <p class="honest-pricing-drawer__text">
+          While most "business people" tell us our markup is too low, we disagree. We are forgoing short-term profits in exchange for offering our friends, family, and customers a better value. This is something we are very proud of and believe will pay off in the long-term; after all, great products at a great value never go out of style!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .honest-pricing-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .honest-pricing-drawer.is-open {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .honest-pricing-drawer__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .honest-pricing-drawer.is-open .honest-pricing-drawer__overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .honest-pricing-drawer__content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    z-index: 1;
+  }
+
+  .honest-pricing-drawer.is-open .honest-pricing-drawer__content {
+    transform: translateX(0);
+  }
+
+  .honest-pricing-drawer__header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 24px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .honest-pricing-drawer__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    color: #1a1a1a;
+    margin: 0 auto;
+  }
+
+  .honest-pricing-drawer__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    transition: color 0.2s ease;
+  }
+
+  .honest-pricing-drawer__close:hover {
+    color: #1a1a1a;
+  }
+
+  .honest-pricing-drawer__body {
+    padding: 32px 24px;
+  }
+
+  .honest-pricing-drawer__section {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .honest-pricing-drawer__intro {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #374151;
+    margin: 0 0 32px 0;
+    text-align: center;
+  }
+
+  .honest-pricing-drawer__image-container {
+    margin: 0 0 32px 0;
+  }
+
+  .honest-pricing-drawer__image {
+    max-width: 60%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+
+  .honest-pricing-drawer__comparison {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px 16px;
+    margin: 0 0 32px 0;
+  }
+
+  .honest-pricing-drawer__comparison-labels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .honest-pricing-drawer__label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .honest-pricing-drawer__scale-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .honest-pricing-drawer__scale-label {
+    font-size: 11px;
+    color: #6b7280;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .honest-pricing-drawer__scale {
+    flex: 1;
+    position: relative;
+    padding-top: 24px;
+  }
+
+  .honest-pricing-drawer__scale-bar {
+    height: 8px;
+    background: linear-gradient(to right, #e5e7eb 0%, #d1d5db 25%, #9ca3af 50%, #6b7280 75%, #374151 100%);
+    border-radius: 4px;
+  }
+
+  .honest-pricing-drawer__marker {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .honest-pricing-drawer__text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #4b5563;
+    margin: 0;
+    text-align: center;
+  }
+
+  .honest-pricing-drawer__section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 16px 0;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .honest-pricing-drawer__content {
+      max-width: 100%;
+    }
+
+    .honest-pricing-drawer__title {
+      font-size: 20px;
+    }
+
+    .honest-pricing-drawer__comparison-labels {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .honest-pricing-drawer__label {
+      font-size: 11px;
+    }
+
+    .honest-pricing-drawer__scale-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+
+    .honest-pricing-drawer__scale-label {
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  class HonestPricingDrawer extends HTMLElement {
+    constructor() {
+      super();
+      this.drawer = this.querySelector('.honest-pricing-drawer');
+      this.closeBtn = this.querySelector('.honest-pricing-drawer__close');
+      this.overlay = this.querySelector('.honest-pricing-drawer__overlay');
+
+      this.closeBtn?.addEventListener('click', () => this.close());
+      this.overlay?.addEventListener('click', () => this.close());
+
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.drawer?.classList.contains('is-open')) {
+          this.close();
+        }
+      });
+    }
+
+    open() {
+      this.drawer?.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+
+      // Set header z-index to 0
+      const header = document.querySelector('.shopify-section--header');
+      if (header) {
+        header.style.zIndex = '0';
+      }
+    }
+
+    close() {
+      this.drawer?.classList.remove('is-open');
+      document.body.style.overflow = '';
+
+      // Restore header z-index
+      const header = document.querySelector('.shopify-section--header');
+      if (header) {
+        header.style.zIndex = '';
+      }
+    }
+  }
+
+  customElements.define('honest-pricing-drawer', HonestPricingDrawer);
+</script>

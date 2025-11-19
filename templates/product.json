@@ -42,6 +42,7 @@
         },
         "payment_terms": {
           "type": "payment_terms",
+          "disabled": true,
           "settings": {}
         },
         "rating_3CJAHe": {
@@ -54,6 +55,14 @@
         "separator": {
           "type": "separator",
           "settings": {}
+        },
+        "honest_pricing_guarantee_hpg123": {
+          "type": "honest_pricing_guarantee",
+          "settings": {
+            "text": "Honest Pricing Guarantee",
+            "link_text": "More info",
+            "drawer_image": "shopify://shop_images/Weekendtassen_100a0edd-b19c-4d20-a2af-1f07b1fb3d64.webp"
+          }
         },
         "modal_TrrDHN": {
           "type": "modal",
@@ -178,6 +187,7 @@
         "payment_terms",
         "rating_3CJAHe",
         "separator",
+        "honest_pricing_guarantee_hpg123",
         "modal_TrrDHN",
         "variant_picker",
         "buy_buttons",
@@ -278,6 +288,23 @@
         "remove_horizontal_spacing": false
       }
     },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "recommendations_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "Related products",
+        "content": ""
+      }
+    },
     "collection_list_8C76ep": {
       "type": "collection-list",
       "blocks": {
@@ -351,23 +378,6 @@
         "content": ""
       }
     },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": false,
-        "hide_product_information": false,
-        "stack_products": false,
-        "recommendations_count": 10,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "horizontal_spacing_factor": 1,
-        "vertical_spacing_factor": 1,
-        "subheading": "",
-        "title": "Related products",
-        "content": ""
-      }
-    },
     "blocks_XbVnzh": {
       "type": "_blocks",
       "blocks": {
@@ -425,8 +435,8 @@
     "main",
     "1763092897efa01d29",
     "1763090876fa1beb6a",
-    "collection_list_8C76ep",
     "related-products",
+    "collection_list_8C76ep",
     "blocks_XbVnzh"
   ]
 }

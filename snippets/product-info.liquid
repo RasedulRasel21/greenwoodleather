@@ -537,6 +537,26 @@ Supported variables
               </a>
             {%- endif -%}
 
+          {%- when 'honest_pricing_guarantee' -%}
+            {%- if block.settings.text != blank -%}
+              {%- assign drawer_id = 'honest-pricing-drawer-' | append: block.id -%}
+
+              <div class="honest-pricing-guarantee">
+                <svg class="honest-pricing-guarantee__icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="10" fill="#000000"/>
+                  <path d="M6 10L9 13L14 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="honest-pricing-guarantee__text">{{ block.settings.text }}</span>
+                <button class="honest-pricing-guarantee__link" onclick="document.querySelector('honest-pricing-drawer').open()">
+                  {{ block.settings.link_text }}
+                </button>
+              </div>
+
+              <honest-pricing-drawer>
+                {%- render 'honest-pricing-drawer', drawer_id: drawer_id, drawer_image: block.settings.drawer_image -%}
+              </honest-pricing-drawer>
+            {%- endif -%}
+
           {%- when 'product_bundle' -%}
             {%- render 'product-bundle', block: block, product: product -%}
         {%- endcase -%}

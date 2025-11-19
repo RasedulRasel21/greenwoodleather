@@ -129,7 +129,8 @@
         "show_country_name": false,
         "show_country_flag": true,
         "show_locale_selector": false,
-        "transparent_header_text_color": "#ffffff"
+        "transparent_header_text_color": "#ffffff",
+        "transparent_logo": "shopify://shop_images/logo_00a9cf6d-f62b-40f4-8f6b-c6f85dc374d1.png"
       }
     }
   },
