@@ -854,6 +854,22 @@ quick buy information in a template, that will be extracted in JS, which ensures
           "type": "color",
           "id": "payment_button_text_color",
           "label": "t:sections.main_product.blocks.buy_buttons.payment_button_text_color"
+        },
+        {
+          "type": "text",
+          "id": "discount_code",
+          "label": "Discount Code",
+          "default": "TAKE20"
+        },
+        {
+          "type": "range",
+          "id": "discount_amount",
+          "label": "Discount Amount",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "default": 20
         }
       ]
     },
@@ -1909,12 +1925,6 @@ quick buy information in a template, that will be extracted in JS, which ensures
           "id": "link_text",
           "label": "Link Text",
           "default": "More info"
-        },
-        {
-          "type": "image_picker",
-          "id": "drawer_image",
-          "label": "Drawer Image",
-          "info": "Image displayed in the pricing drawer"
         }
       ]
     },
@@ -2058,6 +2068,28 @@ quick buy information in a template, that will be extracted in JS, which ensures
           "id": "product_2_label",
           "label": "Product 2 Label",
           "default": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "bundle_product_3",
+          "label": "Bundle Product 3"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "product_3_label",
+          "label": "Product 3 Label",
+          "default": "Product 3"
+        },
+        {
+          "type": "product",
+          "id": "bundle_product_4",
+          "label": "Bundle Product 4"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "product_4_label",
+          "label": "Product 4 Label",
+          "default": "Product 4"
         },
         {
           "type": "range",

@@ -50,7 +50,7 @@ Supported variables
 .promo-code {
   padding: 4px 10px;
   color: white;
-  background: #54744d;
+  background: red;
   cursor: pointer;
   animation: dashMove 1s linear infinite;
 }
@@ -125,22 +125,24 @@ Supported variables
         {%- endif -%}
 
         {% assign regular_price = product.price | money_without_currency | plus: 0 %}
-        {% assign discount_amount = regular_price | times: 0.20 %}
-        {% assign discounted_price = regular_price | minus: discount_amount %}
+        {% assign discount_percentage = discount_amount | default: 20 %}
+        {% assign discount_value = regular_price | times: discount_percentage | divided_by: 100.0 %}
+        {% assign discounted_price = regular_price | minus: discount_value %}
+        {% assign promo_code = discount_code | default: "TAKE20" %}
 
         <div class="promo-banner">
           <div class="promo-prices">
-            <span>WAS: 
+            <span>WAS:
               <span class="old-price">${{ regular_price }}</span>
             </span>
-            <span> TODAY: 
+            <span> TODAY:
               <span class="new-price">${{ discounted_price | round: 2 }}</span>
             </span>
           </div>
 
           <div class="promo-code-wrapper">
             <span>ENTER CODE</span>
-            <div class="promo-code" id="copyCode">TAKE20</div>
+            <div class="promo-code" id="copyCode">{{ promo_code }}</div>
             <span>AT CHECKOUT</span>
           </div>
 

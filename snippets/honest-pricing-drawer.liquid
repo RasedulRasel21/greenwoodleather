@@ -30,9 +30,9 @@ Supported variables
           We are committed to offering you the best value, which is why we price our products honestly 365 days a year.
         </p>
 
-        {%- if drawer_image != blank -%}
+        {%- if product.featured_image != blank -%}
           <div class="honest-pricing-drawer__image-container">
-            {{- drawer_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '600px', widths: '400,600,800,1000,1200', class: 'honest-pricing-drawer__image' -}}
+            {{- product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '600px', widths: '400,600,800,1000,1200', class: 'honest-pricing-drawer__image' -}}
           </div>
         {%- endif -%}
 

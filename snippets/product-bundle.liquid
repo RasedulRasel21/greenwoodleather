@@ -16,11 +16,13 @@ Supported variables
 {%- liquid
   assign bundle_product_1 = block.settings.bundle_product_1
   assign bundle_product_2 = block.settings.bundle_product_2
+  assign bundle_product_3 = block.settings.bundle_product_3
+  assign bundle_product_4 = block.settings.bundle_product_4
   assign discount_percentage = block.settings.discount_percentage
   assign discount_code = block.settings.discount_code
 -%}
 
-{%- if bundle_product_1 != blank or bundle_product_2 != blank -%}
+{%- if bundle_product_1 != blank or bundle_product_2 != blank or bundle_product_3 != blank or bundle_product_4 != blank -%}
   <style>
     .product-bundle {
       border: 1px solid #cfcfcf;
@@ -96,8 +98,8 @@ Supported variables
 
     .product-bundle__promo-code {
       padding: 4px 10px;
-      color: {{ block.settings.promo_text_color }};
-      background: {{ block.settings.promo_background }};
+      color: white;
+      background: red;
       cursor: pointer;
       font-weight: 600;
     }
@@ -217,6 +219,22 @@ Supported variables
           {%- endif -%}
         </div>
       {%- endif -%}
+
+      {%- if bundle_product_3 != blank -%}
+        <div class="product-bundle__image-wrapper" id="bundle-image-3-{{ block.id }}" data-product-id="{{ bundle_product_3.id }}">
+          {%- if bundle_product_3.featured_image -%}
+            {{ bundle_product_3.featured_image | image_url: width: 200 | image_tag: loading: 'lazy' }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if bundle_product_4 != blank -%}
+        <div class="product-bundle__image-wrapper" id="bundle-image-4-{{ block.id }}" data-product-id="{{ bundle_product_4.id }}">
+          {%- if bundle_product_4.featured_image -%}
+            {{ bundle_product_4.featured_image | image_url: width: 200 | image_tag: loading: 'lazy' }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     </div>
 
     {%- comment -%} Price Display {%- endcomment -%}
@@ -311,6 +329,80 @@ Supported variables
             <span class="product-bundle__item-old-price">${{ product_2_price | round: 2 }}</span>
             <span class="product-bundle__item-new-price">
               ${{ product_2_new_price | round: 2 }}
+              <span style="font-size: 11px; color: #e74c3c;">with code {{ discount_code }}</span>
+            </span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if bundle_product_3 != blank -%}
+        {%- liquid
+          assign product_3_price = bundle_product_3.price | money_without_currency | plus: 0
+          assign product_3_discount = product_3_price | times: discount_percentage | divided_by: 100.0
+          assign product_3_new_price = product_3_price | minus: product_3_discount
+        -%}
+        <div class="product-bundle__item">
+          <div class="product-bundle__item-left">
+            <input
+              type="checkbox"
+              class="product-bundle__checkbox bundle-checkbox"
+              id="bundle-product-3-{{ block.id }}"
+              data-product-id="{{ bundle_product_3.selected_or_first_available_variant.id }}"
+              data-price="{{ product_3_price }}"
+              data-discount="{{ discount_percentage }}"
+              data-image-id="bundle-image-3-{{ block.id }}"
+              data-bundle-id="{{ block.id }}"
+              checked
+            >
+            <label for="bundle-product-3-{{ block.id }}" class="product-bundle__item-label">
+              {%- if block.settings.product_3_label != blank and block.settings.product_3_label != 'Product 3' -%}
+                {{ block.settings.product_3_label }}
+              {%- else -%}
+                {{ bundle_product_3.title }}
+              {%- endif -%}
+            </label>
+          </div>
+          <div class="product-bundle__item-prices">
+            <span class="product-bundle__item-old-price">${{ product_3_price | round: 2 }}</span>
+            <span class="product-bundle__item-new-price">
+              ${{ product_3_new_price | round: 2 }}
+              <span style="font-size: 11px; color: #e74c3c;">with code {{ discount_code }}</span>
+            </span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if bundle_product_4 != blank -%}
+        {%- liquid
+          assign product_4_price = bundle_product_4.price | money_without_currency | plus: 0
+          assign product_4_discount = product_4_price | times: discount_percentage | divided_by: 100.0
+          assign product_4_new_price = product_4_price | minus: product_4_discount
+        -%}
+        <div class="product-bundle__item">
+          <div class="product-bundle__item-left">
+            <input
+              type="checkbox"
+              class="product-bundle__checkbox bundle-checkbox"
+              id="bundle-product-4-{{ block.id }}"
+              data-product-id="{{ bundle_product_4.selected_or_first_available_variant.id }}"
+              data-price="{{ product_4_price }}"
+              data-discount="{{ discount_percentage }}"
+              data-image-id="bundle-image-4-{{ block.id }}"
+              data-bundle-id="{{ block.id }}"
+              checked
+            >
+            <label for="bundle-product-4-{{ block.id }}" class="product-bundle__item-label">
+              {%- if block.settings.product_4_label != blank and block.settings.product_4_label != 'Product 4' -%}
+                {{ block.settings.product_4_label }}
+              {%- else -%}
+                {{ bundle_product_4.title }}
+              {%- endif -%}
+            </label>
+          </div>
+          <div class="product-bundle__item-prices">
+            <span class="product-bundle__item-old-price">${{ product_4_price | round: 2 }}</span>
+            <span class="product-bundle__item-new-price">
+              ${{ product_4_new_price | round: 2 }}
               <span style="font-size: 11px; color: #e74c3c;">with code {{ discount_code }}</span>
             </span>
           </div>

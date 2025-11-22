@@ -60,8 +60,7 @@
           "type": "honest_pricing_guarantee",
           "settings": {
             "text": "Honest Pricing Guarantee",
-            "link_text": "More info",
-            "drawer_image": "shopify://shop_images/Weekendtassen_100a0edd-b19c-4d20-a2af-1f07b1fb3d64.webp"
+            "link_text": "More info"
           }
         },
         "modal_TrrDHN": {
@@ -94,7 +93,9 @@
             "atc_button_background": "",
             "atc_button_text_color": "",
             "payment_button_background": "",
-            "payment_button_text_color": ""
+            "payment_button_text_color": "",
+            "discount_code": "TAKE40",
+            "discount_amount": 40
           }
         },
         "feature_with_drawer_7K9kWg": {
@@ -190,8 +191,12 @@
             "product_1_label": "Product 1",
             "bundle_product_2": "elora-mini-crossbody-black-leather-bag",
             "product_2_label": "Product 2",
-            "discount_percentage": 20,
-            "discount_code": "TAKE20",
+            "bundle_product_3": "embossed-leather-belt-black-with-western-style-buckle",
+            "product_3_label": "Product 3",
+            "bundle_product_4": "greenwood-oslo-compact-crossbody-purple",
+            "product_4_label": "Product 4",
+            "discount_percentage": 30,
+            "discount_code": "TAKE30",
             "promo_background": "#54744d",
             "promo_text_color": "#ffffff",
             "new_price_color": "#54744d"
@@ -284,6 +289,70 @@
         "separate_section_with_border": false,
         "remove_vertical_spacing": false,
         "remove_horizontal_spacing": false
+      }
+    },
+    "image_with_text_7tYkbM": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_rrBpJh": {
+          "type": "heading",
+          "settings": {
+            "text": "Wax Pull Up Leather",
+            "heading_tag": "h3"
+          }
+        },
+        "richtext_WQCABA": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>This is The Greenwood Brand's most commonly used leather. After pressing, the leather is manually colored with aniline color soﬀes that are impregnated with natural oils and waxes instead of dyes and pigments. This soft finish ensures that the fabrics do not stay on the skin, but instead soak into the pores of the skin creating the natural vintage look. Because this leather is only waxed and not sprayed with color, it is a very durable product and retains its quality and color.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rrBpJh",
+        "richtext_WQCABA"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/Sandal_Greenwood_Leather.jpg",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_be8XRf": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_wLfxXg": {
+          "type": "heading",
+          "settings": {
+            "text": "Made by true Master Leatherworkers",
+            "heading_tag": "h3"
+          }
+        },
+        "richtext_ewXtTp": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Every bag from The Greenwood Brand tells a story of genuine craftsmanship. Made from high-quality full-grain leather, carefully selected for its natural beauty and durability. As a family business, we believe in lasting relationships – with our customers and our makers alike.</p><p>In our workshops in India, where we’ve worked with trusted partners for decades, the same spirit of respect and dedication defines everything we do. Here, traditional craftsmanship meets modern innovation. Each design is hand-finished, stitched, and inspected with precision.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wLfxXg",
+        "richtext_ewXtTp"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/shoulder-bag-leather-shoulder-bag-bianca-cognac-default-title-36850994806934.jpg",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
       }
     },
     "1763090876fa1beb6a": {
@@ -448,70 +517,6 @@
         "separate_section_with_border": false,
         "remove_vertical_spacing": false,
         "remove_horizontal_spacing": false
-      }
-    },
-    "image_with_text_7tYkbM": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_rrBpJh": {
-          "type": "heading",
-          "settings": {
-            "text": "Wax Pull Up Leather",
-            "heading_tag": "h3"
-          }
-        },
-        "richtext_WQCABA": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>This is The Greenwood Brand's most commonly used leather. After pressing, the leather is manually colored with aniline color soﬀes that are impregnated with natural oils and waxes instead of dyes and pigments. This soft finish ensures that the fabrics do not stay on the skin, but instead soak into the pores of the skin creating the natural vintage look. Because this leather is only waxed and not sprayed with color, it is a very durable product and retains its quality and color.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_rrBpJh",
-        "richtext_WQCABA"
-      ],
-      "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "separate_section_with_border": true,
-        "image": "shopify://shop_images/front-facing-lifestyle-image-of-wilson-leather-weekender-bag-at-australian-beach.png",
-        "reveal_on_scroll": true,
-        "image_position": "start",
-        "content_width": "sm",
-        "remove_vertical_spacing": true
-      }
-    },
-    "image_with_text_be8XRf": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_wLfxXg": {
-          "type": "heading",
-          "settings": {
-            "text": "Made by true Master Leatherworkers",
-            "heading_tag": "h3"
-          }
-        },
-        "richtext_ewXtTp": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>Every bag from The Greenwood Brand tells a story of genuine craftsmanship. Made from high-quality full-grain leather, carefully selected for its natural beauty and durability. As a family business, we believe in lasting relationships – with our customers and our makers alike.</p><p>In our workshops in India, where we’ve worked with trusted partners for decades, the same spirit of respect and dedication defines everything we do. Here, traditional craftsmanship meets modern innovation. Each design is hand-finished, stitched, and inspected with precision.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_wLfxXg",
-        "richtext_ewXtTp"
-      ],
-      "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "separate_section_with_border": true,
-        "image": "shopify://shop_images/shoulder-bag-leather-shoulder-bag-bianca-cognac-default-title-36850994806934.jpg",
-        "reveal_on_scroll": true,
-        "image_position": "end",
-        "content_width": "sm",
-        "remove_vertical_spacing": true
       }
     }
   },

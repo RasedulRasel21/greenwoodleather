@@ -361,7 +361,9 @@ Supported variables
                 atc_button_background: block.settings.atc_button_background,
                 atc_button_text_color: block.settings.atc_button_text_color,
                 payment_button_background: block.settings.payment_button_background,
-                payment_button_text_color: block.settings.payment_button_text_color
+                payment_button_text_color: block.settings.payment_button_text_color,
+                discount_code: block.settings.discount_code,
+                discount_amount: block.settings.discount_amount
             -%}
 
           {%- when 'pickup_availability' -%}
@@ -553,7 +555,7 @@ Supported variables
               </div>
 
               <honest-pricing-drawer>
-                {%- render 'honest-pricing-drawer', drawer_id: drawer_id, drawer_image: block.settings.drawer_image -%}
+                {%- render 'honest-pricing-drawer', drawer_id: drawer_id -%}
               </honest-pricing-drawer>
             {%- endif -%}
 
